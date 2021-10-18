@@ -1,4 +1,4 @@
-package hk.edu.polyu.comp3211.g27.controller;
+package hk.edu.polyu.comp3211.g27.model;
 
 import hk.edu.polyu.comp3211.g27.model.Player;
 import hk.edu.polyu.comp3211.g27.model.square.Square;
