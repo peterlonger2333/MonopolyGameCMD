@@ -18,4 +18,12 @@ public class PreGameController {
     public void loadGame(String gameId) throws IllegalArgumentException {
 
     }
+    
+    /**
+     * Get the help menu.
+     *
+     * This method provides an entry to the let the user read the software manual.
+     */
+    public void Help(){}
+    
 }
