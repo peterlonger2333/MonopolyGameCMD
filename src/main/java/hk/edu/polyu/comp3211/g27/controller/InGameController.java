@@ -26,6 +26,11 @@ public class InGameController {
     private void postMove() {
         // cary out the square effect
     }
+    
+    /**
+     * update the property of the player.
+     */
+    public void updateProperty(){}
 
     /**
      * Check whether the game is in the ending state
