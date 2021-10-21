@@ -15,7 +15,6 @@ public class GoSquare extends Square{
     }
 
     /**
-     *
      * Each time a player lands on Go square, the player will get HKD 1500 salary.
      *
      * @param game The game which to take effect
