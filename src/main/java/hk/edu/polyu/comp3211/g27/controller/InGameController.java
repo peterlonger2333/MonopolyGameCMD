@@ -9,11 +9,8 @@ public class InGameController {
      * For extensibility, a "CommunicationChannel" can be passed to this method. The current channel (without parameter)
      * is the standard input and output streams.
      *
-     * This method automatically updates the turn to the next player.
+     * This method automatically increments the "turn count".
      */
-    
-    private int turn;
-    
     public void doTurn() {
 
     }
@@ -29,11 +26,6 @@ public class InGameController {
     private void postMove() {
         // cary out the square effect
     }
-    
-    /**
-     * update the property of the player.
-     */
-    public void updateProperty(){}
 
     /**
      * Check whether the game is in the ending state
