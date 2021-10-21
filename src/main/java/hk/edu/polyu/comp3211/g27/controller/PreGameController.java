@@ -16,7 +16,7 @@ public class PreGameController {
      * @throws IllegalArgumentException when the id is not found
      */
     public void loadGame(String gameId) throws IllegalArgumentException {
-
+        this.gameId = gameId;
     }
     
     /**
