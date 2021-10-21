@@ -2,6 +2,7 @@ package hk.edu.polyu.comp3211.g27.model;
 
 import hk.edu.polyu.comp3211.g27.model.square.Square;
 
+import java.util.HashMap;
 import java.util.List;
 
 // Does the game have the notion of a "turn"
@@ -10,6 +11,7 @@ public class Game {
     /* Handling player information */
     public List<Player> allPlayers() { return null; }
     public List<Player> playersLeft() { return null; }
+    public HashMap<Player, Integer> playersInJail() { return null; }
 
     /* Handling players' score */
     public int currentMoney(Player player) { return 0; }
