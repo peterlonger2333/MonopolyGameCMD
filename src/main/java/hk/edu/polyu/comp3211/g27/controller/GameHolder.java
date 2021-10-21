@@ -1,29 +1,20 @@
 package hk.edu.polyu.comp3211.g27.controller;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import hk.edu.polyu.comp3211.g27.model.Game;
 
-public class GameHolder extends ThreadLocal<Game> {
-    @Override
-    protected Game initialValue() {
-        return super.initialValue();
+/**
+ * Holds a [Game] for each thread. Note that this is a single-thread implementation.
+ */
+public class GameHolder {
+    private static final ThreadLocal<Game> threadLocalGame = new ThreadLocal<>();
+
+    public static void set(@NotNull Game game) {
+        threadLocalGame.set(game);
     }
 
-    public GameHolder() {
-        super();
-    }
-
-    @Override
-    public Game get() {
-        return super.get();
-    }
-
-    @Override
-    public void set(Game value) {
-        super.set(value);
-    }
-
-    @Override
-    public void remove() {
-        super.remove();
+    public static @Nullable Game get() {
+        return threadLocalGame.get();
     }
 }
