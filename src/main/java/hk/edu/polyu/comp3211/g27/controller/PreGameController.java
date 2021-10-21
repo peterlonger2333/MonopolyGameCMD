@@ -16,6 +16,14 @@ public class PreGameController {
      * @throws IllegalArgumentException when the id is not found
      */
     public void loadGame(String gameId) throws IllegalArgumentException {
-
+        this.gameId = gameId;
     }
+    
+    /**
+     * Get the help menu.
+     *
+     * This method provides an entry to the let the user read the software manual.
+     */
+    public void Help(){}
+    
 }
