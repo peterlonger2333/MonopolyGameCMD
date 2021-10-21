@@ -11,6 +11,9 @@ public class InGameController {
      *
      * This method automatically updates the turn to the next player.
      */
+    
+    private int turn;
+    
     public void doTurn() {
 
     }
