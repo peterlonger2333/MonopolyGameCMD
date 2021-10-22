@@ -12,7 +12,7 @@ public class ChanceSquare extends Square{
         super(index, label);
     }
 
-    private int getAmount(){
+    public int getAmount(){
         return ((new Random().nextInt(50) - 30) * MULTIPLE);
     }
 
