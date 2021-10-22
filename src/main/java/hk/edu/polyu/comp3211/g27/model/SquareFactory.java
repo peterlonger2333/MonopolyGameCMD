@@ -37,4 +37,8 @@ public class SquareFactory {
     public static IncomeTaxSquare getIncomeTaxSquare() {
         return null;
     }
+    
+    public static JailSquare getJailSquare() {
+        return null;
+    }
 }
