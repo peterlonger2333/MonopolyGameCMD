@@ -4,11 +4,19 @@ import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
 
 public class JailSquare extends Square{
-    public static final int TURNS = 3;
-    public static final int FINE = 150;
+    private static final int TURNS = 3;
+    private static final int FINE = 150;
 
     public JailSquare(int index, String label) {
         super(index, label);
+    }
+    
+    public int getTurns(){
+        return TURNS;
+    }
+    
+    public int getFine(){
+        return FINE;
     }
 
     /**
