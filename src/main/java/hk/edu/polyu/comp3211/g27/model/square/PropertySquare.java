@@ -1,8 +1,8 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
-import com.sun.istack.internal.Nullable;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represent "Property Squares" in the Monopoly Game. This type of square has extra characteristics - price, rent and the
