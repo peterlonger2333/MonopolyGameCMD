@@ -6,9 +6,6 @@ public class InGameController {
      * be logically divided into three phases: preMove, move, and postMove. The three phases may not all be carried out,
      * for example, when the player is currently in jail.
      *
-     * For extensibility, a "CommunicationChannel" can be passed to this method. The current channel (without parameter)
-     * is the standard input and output streams.
-     *
      * This method automatically increments the "turn count".
      */
     public void doTurn() {
@@ -28,7 +25,8 @@ public class InGameController {
     }
 
     /**
-     * Check whether the game is in the ending state
+     * Check whether the game is in the ending state.
+     *
      * @return true if the game ends after a turn
      */
     public boolean isGameEnd() {

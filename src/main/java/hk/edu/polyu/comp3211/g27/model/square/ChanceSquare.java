@@ -18,14 +18,13 @@ public class ChanceSquare extends Square{
 
     /**
      * The player landing on Chance Square either:
-     *
      * 1. Gains up to HKD 200.
      * 2. Loses up to HKD 300.
      *
      * @param game The game on which to take effect
      */
     @Override
-    public void effect(Game game) {
+    public void onEnter(Game game) {
 
     }
 }

@@ -1,10 +1,15 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
+import com.sun.istack.internal.Nullable;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
 
+/**
+ * Represent "Property Squares" in the Monopoly Game. This type of square has extra characteristics - price, rent and the
+ * current property holder.
+ */
 public class PropertySquare extends Square{
-    private Player holder;
+    private @Nullable Player holder;
     private final int price;
     private final int rent;
 
@@ -14,7 +19,13 @@ public class PropertySquare extends Square{
         this.rent = rent;
     }
 
-    public Player getHolder() {
+    /**
+     * Get the current holder of the property. {@code Null} value indicates that this square is not bought by any player
+     * yet.
+     *
+     * @return current holder of this property.
+     */
+    public @Nullable Player getHolder() {
         return holder;
     }
 
@@ -40,7 +51,7 @@ public class PropertySquare extends Square{
      * @param game The game on which to take effect
      */
     @Override
-    public void effect(Game game) {
+    public void onEnter(Game game) {
 
     }
 }

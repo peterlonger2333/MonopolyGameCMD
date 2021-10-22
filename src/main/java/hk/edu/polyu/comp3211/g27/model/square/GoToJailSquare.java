@@ -15,7 +15,7 @@ public class GoToJailSquare extends Square {
      * @param game The game on which to take effect
      */
     @Override
-    public void effect(Game game) {
+    public void onEnter(Game game) {
 
     }
 }

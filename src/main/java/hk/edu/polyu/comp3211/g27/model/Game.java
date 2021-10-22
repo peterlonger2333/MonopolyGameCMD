@@ -12,30 +12,56 @@ import java.util.Map;
  *  4. "Time" of the game, i.e. {@link Turn}. This includes total elapsed time, as well as current time.
  */
 public class Game {
-    /* Handling player information */
+    /* ------------------------------------ */
+    /* -------- Player Information -------- */
+    /* ------------------------------------ */
+
     public List<Player> allPlayers() { return null; }
     public List<Player> playersLeft() { return null; }
+
+    /* ------------------------------------------- */
+    /* -------- Player - Property mapping -------- */
+    /* ------------------------------------------- */
+
     public void grantOwnership(Player player, String property) {}
     public void revokeOwnership(Player player, String property) {}
     public Map<Player, List<String>> propertyHoldingStatus() { return null; }
     public List<String> propertyHoldingStatusFor(Player player) { return null; }
 
-    public int inJailCheck(Player player) { return 0; }
-    public Map<Player, Integer> playersInJail() { return null; }
+    /* ------------------------------------ */
+    /* ------------ Jail Status ----------- */
+    /* ------------------------------------ */
 
-    /* Handling players' score */
+    /**
+     * {@code Jail} is a mapping from {@code Player} to their round left in the jail. For example, if round left is 0,
+     * this means the player is not in jail.
+     *
+     * @return the jail status
+     */
+    public Map<Player, Integer> playersInJail() { return null; }
+    public int inJailCheck(Player player) { return 0; }
+
+    /* ------------------------------------ */
+    /* ----------- Score Status ----------- */
+    /* ------------------------------------ */
     public int currentMoney(Player player) { return 0; }
     public void addMoney(int amount, Player player) {}
     public void subtractMoney(int amount, Player player) {}
     public void pay(int amount, Player payer, Player payee) {}
 
-    /* Handling player's movement */
+    /* ------------------------------------ */
+    /* ---------- Player Movement --------- */
+    /* ------------------------------------ */
+
     public Square currentSquare(Player player) { return null; }
     public void move() {}
     public void move(Turn turn) {}
     public void move(Player player, Square toSquare) {}
 
-    /* Handling in-game status */
+    /* ------------------------------------ */
+    /* ------------- Game Time ------------ */
+    /* ------------------------------------ */
+
     public int getRound() { return 0; }
     public boolean isGameEnd() { return false; }
     public Turn currentTurn() { return null; }

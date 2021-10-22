@@ -17,7 +17,7 @@ public class GoSquare extends Square{
      */
 
     @Override
-    public void effect(Game game) {
+    public void onEnter(Game game) {
 
     }
 }

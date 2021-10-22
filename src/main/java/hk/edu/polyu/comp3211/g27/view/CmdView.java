@@ -15,7 +15,6 @@ public class CmdView {
         return "";
     }
 
-
     public String gameId(){
         return "";
     }

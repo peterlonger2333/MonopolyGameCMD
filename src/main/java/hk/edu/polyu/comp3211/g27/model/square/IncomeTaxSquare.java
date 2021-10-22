@@ -3,14 +3,10 @@ package hk.edu.polyu.comp3211.g27.model.square;
 import hk.edu.polyu.comp3211.g27.model.Game;
 
 public class IncomeTaxSquare extends Square{
-    private final static double RATE = 0.1;
+    public static final double RATE = 0.1;
 
     public IncomeTaxSquare(int index, String label) {
         super(index, label);
-    }
-
-    public static double getRATE() {
-        return RATE;
     }
 
     /**
@@ -19,7 +15,7 @@ public class IncomeTaxSquare extends Square{
      * @param game The game on which to take effect
      */
     @Override
-    public void effect(Game game) {
+    public void onEnter(Game game) {
 
     }
 }
