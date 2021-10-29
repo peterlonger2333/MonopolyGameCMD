@@ -1,7 +1,7 @@
 package hk.edu.polyu.comp3211.g27.model;
 
-import com.sun.istack.internal.NotNull;
 import hk.edu.polyu.comp3211.g27.model.square.Square;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * {@link Turn} is the clock of the game. It carries all information for a player's round.
