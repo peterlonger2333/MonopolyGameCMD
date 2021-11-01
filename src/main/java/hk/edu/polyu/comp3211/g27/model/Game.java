@@ -12,6 +12,13 @@ import java.util.Map;
  *  4. "Time" of the game, i.e. {@link Turn}. This includes total elapsed time, as well as current time.
  */
 public class Game {
+    /**
+     * Instantiate a Game with initial players. The play order is given by the list.
+     * @param players an ordered list of initial game players.
+     */
+    public Game(List<Player> players) {
+
+    }
     /* ------------------------------------ */
     /* -------- Player Information -------- */
     /* ------------------------------------ */
