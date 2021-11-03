@@ -28,8 +28,8 @@ class ControllerTest {
     @Test
     @DisplayName("Can save and load game")
     public void canLoadAndSaveGame() {
-        String id = in.archive();
-        pre.loadGame(id);
+        String id = in.archive(); // save the game
+        pre.loadGame(id); // load the game into current context
         Game loaded = GameHolder.get();
 
         assertThat(game, is(equalTo(loaded)));

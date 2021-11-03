@@ -105,7 +105,7 @@ public class PropertySquareTest extends SquareTestBase {
         propertySquare.onEnter(game);
 
         // TODO: verify that *either* `pay` is called *or* the following two methods are called
-        // check that rents are paid
+        // check that rent is paid
         verify(game).subtractMoney(10, player1);
         verify(game).addMoney(10, player2);
     }

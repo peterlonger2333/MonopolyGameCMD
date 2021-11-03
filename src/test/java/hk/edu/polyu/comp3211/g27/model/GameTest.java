@@ -102,7 +102,7 @@ public class GameTest {
     @Test
     @DisplayName("Can move players around according to given square")
     public void canMovePlayersBySquare() {
-        game.move(p3, SquareFactory.getSquare(3));
+        game.move(p3, SquareFactory.getSquare(3)); // perhaps shouldn't use SquareFactory
 
         assertThat(game.currentSquare(p3), equalTo(SquareFactory.getSquare(3)));
     }
@@ -166,7 +166,7 @@ public class GameTest {
     public void canUpdateJailStatus() {
         game.putInJail(p1);
 
-        for (int i = 0; i < 4; i++) game.next();
+        for (int i = 0; i < 4; i++) game.next(); // forward to next round
 
         assertThat(game.inJailCheck(p1), equalTo(2));
     }
@@ -178,7 +178,7 @@ public class GameTest {
         for (int i = 1; i < 4; i++){
             game.subtractMoney(Game.INITIAL_MONEY + 100, players.get(i));
             game.next();
-        }
+        } // make players lose
 
         assertThat(game.playersLeft(), hasSize(1));
         assert game.isGameEnd();
@@ -187,7 +187,7 @@ public class GameTest {
     @Test
     @DisplayName("Should end game when round count reaches over 100")
     public void shouldEndGameWhenRoundReachesMaximum() {
-        for (int i = 0; i < 100 * 4 + 1; i++) game.next();
+        for (int i = 0; i < 100 * 4 + 1; i++) game.next(); // forward 100 rounds
 
         assertThat(game.getRound(), equalTo(101));
         assert game.isGameEnd();
