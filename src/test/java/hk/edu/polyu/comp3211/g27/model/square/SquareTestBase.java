@@ -28,15 +28,19 @@ public abstract class SquareTestBase {
     public void setUpEach() {
         MockitoAnnotations.initMocks(this);
 
+        // mock players
         when(player1.getId()).thenReturn("p1");
         when(player2.getId()).thenReturn("p2");
 
+        // mock initial squares
         when(initialSquare.getLabel()).thenReturn("initialSquare");
         when(initialSquare.getIndex()).thenReturn(0);
 
+        // mock the current turn
         when(turn.getOldSquare()).thenReturn(initialSquare);
         when(turn.getPlayer()).thenReturn(player1);
 
+        // mock output stream
         System.setOut(printStream);
     }
 }
