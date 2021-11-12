@@ -1,6 +1,14 @@
 package hk.edu.polyu.comp3211.g27.controller;
 
+import hk.edu.polyu.comp3211.g27.model.Game;
+import hk.edu.polyu.comp3211.g27.model.SquareFactory;
+import hk.edu.polyu.comp3211.g27.model.Turn;
+
+import java.io.IOException;
+import java.util.Random;
+
 public class InGameController {
+    private final Random dice = new Random(0x3211);
     /**
      * Enter into an interactive session with the current player representing the player's current turn. A turn can
      * be logically divided into three phases: preMove, move, and postMove. The three phases may not all be carried out,
@@ -8,20 +16,35 @@ public class InGameController {
      *
      * This method automatically increments the "turn count".
      */
-    public void doTurn() {
+    public void doTurn() throws IOException {
+        if (game().inJailCheck(turn().getPlayer()) != 0) {
+            SquareFactory.getJailSquare().onPrisonerTurn(game());
+            return;
+        }
 
+        move();
+
+        postMove();
+
+        game().next();
     }
 
-    private void preMove() {
-        // in-jail check
+    private int getRandomStep() {
+        return dice.nextInt(3) + dice.nextInt(3) + 2;
     }
 
-    private void move() {
-        // update game board
+    private void move() throws IOException {
+        System.out.print("Hit Enter to roll dices");
+        System.in.read();
+        int move = getRandomStep();
+        System.out.println("You've drawn: " + move);
+
+        turn().setStepToTake(move);
+        game().move();
     }
 
     private void postMove() {
-        // cary out the square effect
+        turn().getNewSquare().onEnter(game());
     }
 
     /**
@@ -30,7 +53,7 @@ public class InGameController {
      * @return true if the game ends after a turn
      */
     public boolean isGameEnd() {
-        return false;
+        return game().isGameEnd();
     }
 
     /**
@@ -40,5 +63,16 @@ public class InGameController {
      */
     public String archive() {
         return "";
+    }
+
+    private Game game() {
+        Game game = GameHolder.get();
+        if (game == null) throw new IllegalStateException();
+
+        return game;
+    }
+
+    private Turn turn() {
+        return game().currentTurn();
     }
 }

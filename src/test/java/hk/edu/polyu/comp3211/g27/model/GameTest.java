@@ -154,11 +154,9 @@ public class GameTest {
     public void canPutPlayerInAndOutOfJail() {
         game.putInJail(p1);
         assertThat(game.inJailCheck(p1), equalTo(3));
-        assertThat(game.playersInJail(), hasKey(p1));
 
         game.releaseFromJail(p1);
         assertThat(game.inJailCheck(p1), equalTo(0));
-        assertThat(game.playersInJail(), not(hasKey(p1)));
     }
 
     @Test

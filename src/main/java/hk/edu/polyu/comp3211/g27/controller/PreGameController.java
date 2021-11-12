@@ -19,7 +19,9 @@ public class PreGameController {
      * @param gameId Id of the game to be loaded
      * @throws IllegalArgumentException when the id is not found
      */
-    public void loadGame(String gameId) throws IllegalArgumentException {}
+    public void loadGame(String gameId) throws IllegalArgumentException {
+        // games are stored in ./.archive
+    }
     
     /**
      * Directly print the help manual to the screen. The simplest implementation is to print out the rule line by line to

@@ -26,4 +26,8 @@ public class JailSquare extends Square{
     public void onEnter(Game game) {
 
     }
+
+    public void onPrisonerTurn(Game game) {
+
+    }
 }

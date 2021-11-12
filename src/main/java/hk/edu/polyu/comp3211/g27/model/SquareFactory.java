@@ -1,24 +1,35 @@
 package hk.edu.polyu.comp3211.g27.model;
 
 import hk.edu.polyu.comp3211.g27.model.square.*;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 
 /**
  * A convenient and efficient place to store and fetch {@link Square}s in a game board.
  */
 public class SquareFactory {
-    public static Square getSquare(int index) {
+    public static final int SQUARE_CNT = 20; // number of squares in the game
+
+    public static @Nullable Square getSquare(int index) {
         return null;
     }
 
-    public static Square getSquare(String label) {
+    public static @Nullable Square getSquare(String label) {
         return null;
     }
 
-    public static PropertySquare getPropertySquare(int index) {
+    public static @Nullable PropertySquare getPropertySquare(int index) {
         return null;
     }
 
-    public static PropertySquare getPropertySquare(String label) {
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @param label the square label
+     * @return the property square with label
+     */
+    public static @Nullable PropertySquare getPropertySquare(String label) {
         return null;
     }
 
@@ -26,15 +37,17 @@ public class SquareFactory {
         return null;
     }
 
-    public static GoSquare getGoSquare() {
+    public static @NotNull GoSquare getGoSquare() {
         return null;
     }
 
-    public static GoToJailSquare getGoToJailSquare() {
+    public static @NotNull GoToJailSquare getGoToJailSquare() {
         return null;
     }
 
-    public static IncomeTaxSquare getIncomeTaxSquare() {
+    public static @NotNull IncomeTaxSquare getIncomeTaxSquare() {
         return null;
     }
+
+    public static @NotNull JailSquare getJailSquare() {return null;}
 }
