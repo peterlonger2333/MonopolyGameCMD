@@ -13,7 +13,7 @@ public class ChanceSquare extends Square{
     }
 
     private int getAmount(){
-        return ((new Random().nextInt(50) - 30) * MULTIPLE);
+        return ((new Random().nextInt(50) - 30 + 1) * MULTIPLE);
     }
 
     /**
@@ -25,6 +25,9 @@ public class ChanceSquare extends Square{
      */
     @Override
     public void onEnter(Game game) {
-
+        game.addMoney(
+                getAmount(),
+                game.currentTurn().getPlayer()
+        );
     }
 }

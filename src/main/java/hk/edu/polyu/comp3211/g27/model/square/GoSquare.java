@@ -15,9 +15,11 @@ public class GoSquare extends Square{
      *
      * @param game The game which to take effect
      */
-
     @Override
     public void onEnter(Game game) {
-
+        game.addMoney(
+                SALARY,
+                game.currentTurn().getPlayer()
+        );
     }
 }

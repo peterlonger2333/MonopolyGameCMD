@@ -2,11 +2,9 @@ package hk.edu.polyu.comp3211.g27.model.square;
 
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
+import hk.edu.polyu.comp3211.g27.model.Turn;
 import org.jetbrains.annotations.Nullable;
 
-import java.io.BufferedReader;
-import java.io.Reader;
-import java.util.Objects;
 import java.util.Scanner;
 
 /**
@@ -57,9 +55,31 @@ public class PropertySquare extends Square{
      */
     @Override
     public void onEnter(Game game) {
-        System.out.print("Do you want to buy this property?");
         Scanner scanner = new Scanner(System.in);
-        String input = scanner.next("[yn]");
-        if (Objects.equals(input, "n")) System.out.println("See you next time!");
+        Turn currentTurn = game.currentTurn();
+        Player currentPlayer = currentTurn.getPlayer();
+
+        if (holder == null) { // when this property is not occupied
+            if (game.currentMoney(currentPlayer) < price) { // if the player don't have enough money
+                System.out.println("The square is not owned but you do not have enough money.");
+            } else { // ask if the player wants this property
+                String option = "a";
+
+                while (!option.equalsIgnoreCase("y") && !option.equalsIgnoreCase("n")) {
+                    System.out.print("Do you want to buy this property (Y/n): ");
+                    option = scanner.nextLine();
+                }
+
+                if (option.equalsIgnoreCase("y")) { // buy this property
+                    game.grantOwnership(currentPlayer, getLabel());
+                    game.subtractMoney(price, currentPlayer);
+                } else { // don't buy
+                    System.out.println("See you next time!");
+                }
+            }
+        } else { // pay the rent
+            System.out.println("You have landed on " + holder + "'s property, paying rent " + rent);
+            game.pay(rent, currentPlayer, holder);
+        }
     }
 }

@@ -3,8 +3,9 @@ package hk.edu.polyu.comp3211.g27.model.square;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.ArgumentMatcher;
 
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.*;
 import static org.mockito.Mockito.verify;
 
 public class ChanceSquareTest extends SquareTestBase {
@@ -22,12 +23,13 @@ public class ChanceSquareTest extends SquareTestBase {
     public void shouldAffectMoney() {
         chanceSquare.onEnter(game);
 
-        // verify either method is called
-        // ugly but works
-        try {
-            verify(game).addMoney(anyInt(), player1); // maybe use argument matchers to test range
-        } catch (AssertionError e) {
-            verify(game).subtractMoney(anyInt(), player1);
-        }
+        verify(game).addMoney(intThat(
+                new ArgumentMatcher<Integer>() {
+                    @Override
+                    public boolean matches(Object argument) {
+                        return (int) argument >= -300 && (int) argument <= 200;
+                    }
+                }
+        ), eq(player1));
     }
 }

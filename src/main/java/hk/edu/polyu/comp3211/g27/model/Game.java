@@ -99,6 +99,7 @@ public class Game {
         if (propertySquare == null)
             throw new IllegalArgumentException("Property not found");
 
+        propertySquare.setHolder(player);
         propertyHolding.get(player).add(property);
     }
 
@@ -113,6 +114,7 @@ public class Game {
             throw new IllegalArgumentException("Property not found");
 
         // remain silent if the player does not own the property
+        propertySquare.setHolder(null);
         propertyHolding.get(player).remove(property);
     }
 
@@ -154,7 +156,7 @@ public class Game {
     public void putInJail(Player player) {
         playerInGameCheckLeft(player);
 
-        jail.put(player, JAIL_TERM);
+        jail.put(player, JAIL_TERM + 1); // 1 is added to offset this round
     }
 
     public void releaseFromJail(Player player) {

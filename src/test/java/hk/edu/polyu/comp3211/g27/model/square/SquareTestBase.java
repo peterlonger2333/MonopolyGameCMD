@@ -39,6 +39,7 @@ public abstract class SquareTestBase {
         // mock the current turn
         when(turn.getOldSquare()).thenReturn(initialSquare);
         when(turn.getPlayer()).thenReturn(player1);
+        when(game.currentTurn()).thenReturn(turn);
 
         // mock output stream
         System.setOut(printStream);

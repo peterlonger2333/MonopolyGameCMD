@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -53,13 +54,13 @@ public class PropertySquareTest extends SquareTestBase {
 
         propertySquare.onEnter(game);
 
-        verify(printStream, times(1)).println("You don't have enough money to buy this property");
+        verify(printStream).println("The square is not owned but you do not have enough money.");
     }
 
     @Test
     @DisplayName("Current player can buy the property when input 'y'")
     public void canBuyProperty() {
-        InputStream mockInputStream = new ByteArrayInputStream("y".getBytes(StandardCharsets.UTF_8));
+        InputStream mockInputStream = new ByteArrayInputStream("y\n".getBytes(StandardCharsets.UTF_8));
         System.setIn(mockInputStream);
 
         when(game.currentTurn()).thenReturn(turn);
@@ -68,31 +69,18 @@ public class PropertySquareTest extends SquareTestBase {
         propertySquare.onEnter(game);
 
         verify(game, times(1)).subtractMoney(100, player1); // check that the money is paid
-        assertThat(propertySquare.getHolder(), equalTo(player1));
     }
 
     @Test
     @DisplayName("Current player can choose not to buy the property when input 'n'")
     public void canNotBuyProperty() {
-        InputStream mockInputStream = new ByteArrayInputStream("n".getBytes(StandardCharsets.UTF_8));
+        when(game.currentMoney(player1)).thenReturn(200);
+        InputStream mockInputStream = new ByteArrayInputStream("n\n".getBytes(StandardCharsets.UTF_8));
         System.setIn(mockInputStream);
 
         propertySquare.onEnter(game);
 
-        verify(printStream).print("Do you want to buy this property?");
         verify(printStream).println("See you next time!");
-    }
-
-    @Test
-    @DisplayName("Should only accept 'y' or 'n'")
-    public void shouldOnlyAcceptProperInput() {
-        InputStream mockInputStream = new ByteArrayInputStream("x".getBytes(StandardCharsets.UTF_8));
-        System.setIn(mockInputStream);
-
-        when(game.currentTurn()).thenReturn(turn);
-        when(game.currentMoney(player1)).thenReturn(120);
-
-        assertThrows(IllegalArgumentException.class, () -> propertySquare.onEnter(game));
     }
 
     @Test
@@ -106,7 +94,6 @@ public class PropertySquareTest extends SquareTestBase {
 
         // TODO: verify that *either* `pay` is called *or* the following two methods are called
         // check that rent is paid
-        verify(game).subtractMoney(10, player1);
-        verify(game).addMoney(10, player2);
+        verify(game).pay(10, player1, player2);
     }
 }
