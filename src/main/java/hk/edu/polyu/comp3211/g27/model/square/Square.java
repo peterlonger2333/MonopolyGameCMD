@@ -3,6 +3,8 @@ package hk.edu.polyu.comp3211.g27.model.square;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * Represent a square on the game board in the Monopoly Game. A {@link Square} is identified by its {@code label} or its
  * {@code index}. Most importantly, a {@link Square} can have an effect on the game state, once a player has landed on it
@@ -31,4 +33,17 @@ public abstract class Square {
      * @param game The current game
      */
     public abstract void onEnter(Game game);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Square square = (Square) o;
+        return index == square.index && Objects.equals(label, square.label);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(index, label);
+    }
 }

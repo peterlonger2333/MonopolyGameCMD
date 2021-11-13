@@ -1,12 +1,11 @@
 package hk.edu.polyu.comp3211.g27.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import hk.edu.polyu.comp3211.g27.model.square.PropertySquare;
 import hk.edu.polyu.comp3211.g27.model.square.Square;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -19,28 +18,32 @@ import static com.google.common.collect.Lists.newArrayList;
  *  4. "Time" of the game, i.e. {@link Turn}. This includes total elapsed time, as well as current time.
  */
 public class Game {
+    private String id;
     public static final int INITIAL_MONEY = 1500;
     public static final int JAIL_TERM = 3;
     public static final int MAX_ROUND = 100;
 
-    private final List<Player> allPlayers;
+    private List<Player> allPlayers;
     private List<Player> currentPlayers;
 
-    private final Map<Player, Square> board;
-    private final Map<Player, Integer> bank;
-    private final Map<Player, List<String>> propertyHolding;
-    private final Map<Player, Integer> jail; // only holds current players
+    private Map<Player, Square> board;
+    private Map<Player, Integer> bank;
+    private Map<Player, List<String>> propertyHolding;
+    private Map<Player, Integer> jail; // only holds current players
 
     private Turn currentTurn;
     private int playerIndex;
     private int round;
+
+    public Game() {} // for serialisation
 
     /**
      * Instantiate a Game with initial players. The play order is given by the list. List index is interpreted as playing order.
      *
      * @param players an ordered list of initial game players.
      */
-    public Game(@NotNull List<Player> players) {
+    public Game(@NotNull String id, @NotNull List<Player> players) {
+        this.id = id; //TODO: handle duplication
         this.allPlayers = players;
         this.currentPlayers = newArrayList(players); // make a new copy
 
@@ -72,6 +75,10 @@ public class Game {
         playerIndex = 0;
         currentTurn = new Turn(currentPlayers.get(playerIndex), SquareFactory.getGoSquare());
         round = 1; // as well as round
+    }
+
+    public Game(List<Player> players) {
+        this(UUID.randomUUID().toString(), players);
     }
 
     /* ------------------------------------ */
@@ -231,11 +238,10 @@ public class Game {
         return round;
     }
 
+    @JsonIgnore
     public boolean isGameEnd() {
         if (round > MAX_ROUND) return true;
-        if (currentPlayers.size() == 1) return true;
-
-        return false;
+        return currentPlayers.size() == 1;
     }
 
     public Turn currentTurn() {
@@ -282,5 +288,102 @@ public class Game {
     private void playerInGameCheckLeft(Player player) {
         if (!currentPlayers.contains(player))
             throw new IllegalArgumentException("Player is not in the game");
+    }
+
+    public String getId() {
+        return this.id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
+    public void setAllPlayers(List<Player> allPlayers) {
+        this.allPlayers = allPlayers;
+    }
+
+    public List<Player> getCurrentPlayers() {
+        return currentPlayers;
+    }
+
+    public void setCurrentPlayers(List<Player> currentPlayers) {
+        this.currentPlayers = currentPlayers;
+    }
+
+    public Map<Player, Square> getBoard() {
+        return board;
+    }
+
+    public void setBoard(Map<Player, Square> board) {
+        this.board = board;
+    }
+
+    public Map<Player, Integer> getBank() {
+        return bank;
+    }
+
+    public void setBank(Map<Player, Integer> bank) {
+        this.bank = bank;
+    }
+
+    public Map<Player, List<String>> getPropertyHolding() {
+        return propertyHolding;
+    }
+
+    public void setPropertyHolding(Map<Player, List<String>> propertyHolding) {
+        this.propertyHolding = propertyHolding;
+    }
+
+    public Map<Player, Integer> getJail() {
+        return jail;
+    }
+
+    public void setJail(Map<Player, Integer> jail) {
+        this.jail = jail;
+    }
+
+    public Turn getCurrentTurn() {
+        return currentTurn;
+    }
+
+    public void setCurrentTurn(Turn currentTurn) {
+        this.currentTurn = currentTurn;
+    }
+
+    public int getPlayerIndex() {
+        return playerIndex;
+    }
+
+    public void setPlayerIndex(int playerIndex) {
+        this.playerIndex = playerIndex;
+    }
+
+    public void setRound(int round) {
+        this.round = round;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return playerIndex == game.playerIndex &&
+                round == game.round &&
+                id.equals(game.id) &&
+                allPlayers.equals(game.allPlayers) &&
+                currentPlayers.equals(game.currentPlayers) &&
+                board.equals(game.board) && bank.equals(game.bank) &&
+                propertyHolding.equals(game.propertyHolding) &&
+                jail.equals(game.jail) &&
+                currentTurn.equals(game.currentTurn);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

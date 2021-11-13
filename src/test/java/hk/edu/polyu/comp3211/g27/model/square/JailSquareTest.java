@@ -17,12 +17,15 @@ public class JailSquareTest extends SquareTestBase {
         super.setUpEach();
         jailSquare = new JailSquare(11, "JAIL");
     }
+
     @Test
     @DisplayName("Should have no effect when player directly lands on this square")
     public void shouldHaveNoEffectOnLanding() {
-        // well, just test that the current player is put in jail (a common misunderstanding)
+        // well, just test that the current player is not again put in jail (a common misunderstanding)
         jailSquare.onEnter(game);
 
         verify(game, times(0)).putInJail(player1);
     }
+
+    //TODO: test onPrisonerTurn()
 }

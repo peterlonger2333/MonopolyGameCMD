@@ -3,16 +3,21 @@ package hk.edu.polyu.comp3211.g27.model;
 import hk.edu.polyu.comp3211.g27.model.square.Square;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 /**
  * {@link Turn} is the clock of the game. It carries all information for a player's round.
  */
 public class Turn {
-    @NotNull private final Player player;
-    @NotNull private final Square oldSquare;
+    @NotNull private Player player;
+    @NotNull private Square oldSquare;
     private int stepToTake = 0;
     @NotNull private Square newSquare;
 
-    public Turn(@NotNull Player player,@NotNull Square oldSquare) {
+    public Turn() {
+    }
+
+    public Turn(@NotNull Player player, @NotNull Square oldSquare) {
         this.player = player;
         this.oldSquare = oldSquare;
     }
@@ -39,5 +44,26 @@ public class Turn {
 
     public Square getNewSquare() {
         return newSquare;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void setOldSquare(Square oldSquare) {
+        this.oldSquare = oldSquare;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Turn turn = (Turn) o;
+        return stepToTake == turn.stepToTake && player.equals(turn.player) && Objects.equals(oldSquare, turn.oldSquare) && Objects.equals(newSquare, turn.newSquare);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(player, oldSquare, stepToTake, newSquare);
     }
 }

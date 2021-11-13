@@ -6,7 +6,10 @@ import java.util.Objects;
  * Represent a player in the game. A player is identified by a String Id.
  */
 public class Player {
-    private final String id;
+    private String id;
+
+    public Player() {
+    }
 
     public Player(String id) {
         this.id = id;
@@ -14,6 +17,10 @@ public class Player {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override
@@ -27,5 +34,10 @@ public class Player {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return id;
     }
 }

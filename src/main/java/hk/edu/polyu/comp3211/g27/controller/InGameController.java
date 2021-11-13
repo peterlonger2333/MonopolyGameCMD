@@ -1,9 +1,13 @@
 package hk.edu.polyu.comp3211.g27.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.SquareFactory;
 import hk.edu.polyu.comp3211.g27.model.Turn;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
@@ -61,8 +65,17 @@ public class InGameController {
      *
      * @return id of the game archived
      */
-    public String archive() {
-        return "";
+    public String archive() throws IOException {
+        String json = new ObjectMapper().writeValueAsString(game());
+
+        File file = new File("./.archive/" + game().getId() + ".json");
+        file.getParentFile().mkdirs(); //TODO: handle exception
+        FileWriter writer = new FileWriter(file);
+
+        writer.write(json);
+        writer.close();
+
+        return game().getId();
     }
 
     private Game game() {
