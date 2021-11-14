@@ -12,6 +12,15 @@ import java.util.Map;
  *  4. "Time" of the game, i.e. {@link Turn}. This includes total elapsed time, as well as current time.
  */
 public class Game {
+    public static final int INITIAL_MONEY = 1500;
+
+    /**
+     * Instantiate a Game with initial players. The play order is given by the list.
+     * @param players an ordered list of initial game players.
+     */
+    public Game(List<Player> players) {
+
+    }
     /* ------------------------------------ */
     /* -------- Player Information -------- */
     /* ------------------------------------ */
@@ -40,6 +49,8 @@ public class Game {
      */
     public Map<Player, Integer> playersInJail() { return null; }
     public int inJailCheck(Player player) { return 0; }
+    public void putInJail(Player player) {}
+    public void releaseFromJail(Player player) {}
 
     /* ------------------------------------ */
     /* ----------- Score Status ----------- */

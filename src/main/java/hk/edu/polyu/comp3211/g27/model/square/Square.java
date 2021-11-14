@@ -1,6 +1,7 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
 import hk.edu.polyu.comp3211.g27.model.Game;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represent a square on the game board in the Monopoly Game. A {@link Square} is identified by its {@code label} or its
@@ -11,7 +12,7 @@ public abstract class Square {
     private final int index;
     private final String label;
 
-    public Square(int index, String label) {
+    public Square(int index, @NotNull String label) {
         this.index = index;
         this.label = label;
     }
@@ -20,7 +21,7 @@ public abstract class Square {
         return index;
     }
 
-    public String getLabel() {
+    public @NotNull String getLabel() {
         return label;
     }
 

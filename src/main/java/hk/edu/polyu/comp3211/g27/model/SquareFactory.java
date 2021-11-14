@@ -22,7 +22,7 @@ public class SquareFactory {
         return null;
     }
 
-    public static ChanceSquare getChanceSquare() {
+    public static ChanceSquare getChanceSquare(int index) {
         return null;
     }
 
