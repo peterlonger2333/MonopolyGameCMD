@@ -36,7 +36,7 @@ public class SquareFactoryTest {
 
     @Test
     @DisplayName("Fetch free parking square test.")
-    public void fetchSquareTest(){
+    public void fetchFreeParkingSquareTest(){
         FreeParkingSquare freeParkingSquare = SquareFactory.getFreeParkingSquare();
 
         assertEquals(freeParkingSquareLabel, freeParkingSquare.getLabel());
