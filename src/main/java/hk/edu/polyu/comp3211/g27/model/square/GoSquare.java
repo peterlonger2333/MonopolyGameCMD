@@ -1,12 +1,16 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
 
 public class GoSquare extends Square{
     public static final int SALARY = 1500;
 
-    public GoSquare(int index, String label){
+    @JsonCreator
+    public GoSquare(@JsonProperty("index") int index,
+                    @JsonProperty("label") String label){
         super(index, label);
     }
 

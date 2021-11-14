@@ -1,5 +1,7 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
 import hk.edu.polyu.comp3211.g27.model.Turn;
@@ -16,7 +18,11 @@ public class PropertySquare extends Square{
     private final int price;
     private final int rent;
 
-    public PropertySquare(int index, String label, int price, int rent) {
+    @JsonCreator
+    public PropertySquare(@JsonProperty("index") int index,
+                          @JsonProperty("label") String label,
+                          @JsonProperty("price") int price,
+                          @JsonProperty("rent") int rent) {
         super(index, label);
         this.price = price;
         this.rent = rent;
@@ -32,7 +38,7 @@ public class PropertySquare extends Square{
         return holder;
     }
 
-    public void setHolder(Player holder) {
+    public void setHolder(@Nullable Player holder) {
         this.holder = holder;
     }
 

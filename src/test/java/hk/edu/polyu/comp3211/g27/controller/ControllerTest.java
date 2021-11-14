@@ -39,8 +39,6 @@ class ControllerTest {
         Game loaded = GameHolder.get();
 
         System.out.println(new ObjectMapper().writeValueAsString(loaded));
-        System.out.println(game.hashCode());
-        System.out.println(loaded.hashCode());
 
         assert loaded.equals(game);
     }

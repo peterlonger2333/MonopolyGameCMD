@@ -66,4 +66,14 @@ public class Turn {
     public int hashCode() {
         return Objects.hash(player, oldSquare, stepToTake, newSquare);
     }
+
+    @Override
+    public String toString() {
+        return "Turn{" +
+                "player=" + player +
+                ", oldSquare=" + oldSquare +
+                ", stepToTake=" + stepToTake +
+                ", newSquare=" + newSquare +
+                '}';
+    }
 }

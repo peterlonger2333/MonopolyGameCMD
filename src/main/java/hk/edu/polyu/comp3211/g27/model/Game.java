@@ -1,12 +1,15 @@
 package hk.edu.polyu.comp3211.g27.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import hk.edu.polyu.comp3211.g27.model.serial.PlayerKeyDeserializer;
 import hk.edu.polyu.comp3211.g27.model.square.PropertySquare;
 import hk.edu.polyu.comp3211.g27.model.square.Square;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static com.google.common.collect.Lists.newArrayList;
 
@@ -18,24 +21,26 @@ import static com.google.common.collect.Lists.newArrayList;
  *  4. "Time" of the game, i.e. {@link Turn}. This includes total elapsed time, as well as current time.
  */
 public class Game {
-    private String id;
+    private final String id;
     public static final int INITIAL_MONEY = 1500;
     public static final int JAIL_TERM = 3;
     public static final int MAX_ROUND = 100;
 
-    private List<Player> allPlayers;
-    private List<Player> currentPlayers;
+    private final List<Player> allPlayers;
+    private final List<Player> currentPlayers;
 
-    private Map<Player, Square> board;
-    private Map<Player, Integer> bank;
-    private Map<Player, List<String>> propertyHolding;
-    private Map<Player, Integer> jail; // only holds current players
+    @JsonDeserialize(keyUsing = PlayerKeyDeserializer.class)
+    private final Map<Player, Square> board;
+    @JsonDeserialize(keyUsing = PlayerKeyDeserializer.class)
+    private final Map<Player, Integer> bank;
+    @JsonDeserialize(keyUsing = PlayerKeyDeserializer.class)
+    private final Map<Player, List<String>> propertyHolding;
+    @JsonDeserialize(keyUsing = PlayerKeyDeserializer.class)
+    private final Map<Player, Integer> jail; // only holds current players
 
     private Turn currentTurn;
     private int playerIndex;
     private int round;
-
-    public Game() {} // for serialisation
 
     /**
      * Instantiate a Game with initial players. The play order is given by the list. List index is interpreted as playing order.
@@ -79,6 +84,31 @@ public class Game {
 
     public Game(List<Player> players) {
         this(UUID.randomUUID().toString(), players);
+    }
+
+    @JsonCreator
+    public Game(
+            @JsonProperty("id") String id,
+            @JsonProperty("allPlayers") List<Player> allPlayers,
+            @JsonProperty("currentPlayers") List<Player> currentPlayers,
+            @JsonProperty("board") Map<Player, Square> board,
+            @JsonProperty("bank") Map<Player, Integer> bank,
+            @JsonProperty("propertyHolding") Map<Player, List<String>> propertyHolding,
+            @JsonProperty("jail") Map<Player, Integer> jail,
+            @JsonProperty("currentTurn") Turn currentTurn,
+            @JsonProperty("playerIndex") int playerIndex,
+            @JsonProperty("round") int round
+    ) {
+        this.id = id;
+        this.allPlayers = allPlayers;
+        this.currentPlayers = currentPlayers;
+        this.board = board;
+        this.bank = bank;
+        this.propertyHolding = propertyHolding;
+        this.jail = jail;
+        this.currentTurn = currentTurn;
+        this.playerIndex = playerIndex;
+        this.round = round;
     }
 
     /* ------------------------------------ */
@@ -268,7 +298,7 @@ public class Game {
                         });
 
             // handle player update
-            currentPlayers = currentPlayers.stream().filter(it -> bank.get(it) >= 0).collect(Collectors.toList());
+            currentPlayers.removeIf(it -> bank.get(it) < 0);
 
             //TODO: may need to clean up the jail
         } else {
@@ -294,58 +324,6 @@ public class Game {
         return this.id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public List<Player> getAllPlayers() {
-        return allPlayers;
-    }
-
-    public void setAllPlayers(List<Player> allPlayers) {
-        this.allPlayers = allPlayers;
-    }
-
-    public List<Player> getCurrentPlayers() {
-        return currentPlayers;
-    }
-
-    public void setCurrentPlayers(List<Player> currentPlayers) {
-        this.currentPlayers = currentPlayers;
-    }
-
-    public Map<Player, Square> getBoard() {
-        return board;
-    }
-
-    public void setBoard(Map<Player, Square> board) {
-        this.board = board;
-    }
-
-    public Map<Player, Integer> getBank() {
-        return bank;
-    }
-
-    public void setBank(Map<Player, Integer> bank) {
-        this.bank = bank;
-    }
-
-    public Map<Player, List<String>> getPropertyHolding() {
-        return propertyHolding;
-    }
-
-    public void setPropertyHolding(Map<Player, List<String>> propertyHolding) {
-        this.propertyHolding = propertyHolding;
-    }
-
-    public Map<Player, Integer> getJail() {
-        return jail;
-    }
-
-    public void setJail(Map<Player, Integer> jail) {
-        this.jail = jail;
-    }
-
     public Turn getCurrentTurn() {
         return currentTurn;
     }
@@ -354,16 +332,32 @@ public class Game {
         this.currentTurn = currentTurn;
     }
 
+    public List<Player> getAllPlayers() {
+        return allPlayers;
+    }
+
+    public List<Player> getCurrentPlayers() {
+        return currentPlayers;
+    }
+
+    public Map<Player, Square> getBoard() {
+        return board;
+    }
+
+    public Map<Player, Integer> getBank() {
+        return bank;
+    }
+
+    public Map<Player, List<String>> getPropertyHolding() {
+        return propertyHolding;
+    }
+
+    public Map<Player, Integer> getJail() {
+        return jail;
+    }
+
     public int getPlayerIndex() {
         return playerIndex;
-    }
-
-    public void setPlayerIndex(int playerIndex) {
-        this.playerIndex = playerIndex;
-    }
-
-    public void setRound(int round) {
-        this.round = round;
     }
 
     @Override
@@ -385,5 +379,21 @@ public class Game {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id='" + id + '\'' +
+                ", allPlayers=" + allPlayers +
+                ", currentPlayers=" + currentPlayers +
+                ", board=" + board +
+                ", bank=" + bank +
+                ", propertyHolding=" + propertyHolding +
+                ", jail=" + jail +
+                ", currentTurn=" + currentTurn +
+                ", playerIndex=" + playerIndex +
+                ", round=" + round +
+                '}';
     }
 }

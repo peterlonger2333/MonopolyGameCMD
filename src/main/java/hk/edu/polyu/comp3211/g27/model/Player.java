@@ -1,26 +1,23 @@
 package hk.edu.polyu.comp3211.g27.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Objects;
 
 /**
  * Represent a player in the game. A player is identified by a String Id.
  */
 public class Player {
-    private String id;
+    private final String id;
 
-    public Player() {
-    }
-
-    public Player(String id) {
+    @JsonCreator
+    public Player(@JsonProperty("id") String id) {
         this.id = id;
     }
 
     public String getId() {
         return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     @Override
@@ -38,6 +35,12 @@ public class Player {
 
     @Override
     public String toString() {
-        return id;
+        // player is used as key in maps
+        // changing this will lead to incorrect deserialization of the map
+        //TODO: configure jackson
+
+        return "Player{" +
+                "id='" + id + '\'' +
+                '}';
     }
 }

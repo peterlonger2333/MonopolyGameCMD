@@ -1,17 +1,63 @@
 package hk.edu.polyu.comp3211.g27;
 
-import java.io.ByteArrayInputStream;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import hk.edu.polyu.comp3211.g27.model.Player;
+import hk.edu.polyu.comp3211.g27.model.serial.PlayerKeyDeserializer;
+import hk.edu.polyu.comp3211.g27.model.square.GoSquare;
+import hk.edu.polyu.comp3211.g27.model.square.Square;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Test {
     public static void main(String[] args) throws IOException, InterruptedException {
-        InputStream mockInputStream = new ByteArrayInputStream("Hello\n world".getBytes(StandardCharsets.UTF_8));
-        System.setIn(mockInputStream);
+        Player p1 = new Player("p1");
+        Player p2 = new Player("p2");
+        GoSquare go = new GoSquare(0, "GO");
+        TestGame game = new TestGame(new HashMap<>());
 
-        Scanner scanner = new Scanner(System.in);
-        System.out.println(scanner.nextLine());
+        game.set(p1, go);
+        game.set(p2, go);
+
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonGame = mapper.writeValueAsString(game);
+        System.out.println(jsonGame);
+
+        game = mapper.readValue(jsonGame, TestGame.class);
+
+        System.out.println(game);
+    }
+}
+
+class TestGame {
+    @JsonDeserialize(keyUsing = PlayerKeyDeserializer.class)
+    private Map<Player, Square> board;
+
+    public TestGame() {
+    }
+
+    public TestGame(Map<Player, Square> board) {
+        this.board = board;
+    }
+
+    public Map<Player, Square> getBoard() {
+        return board;
+    }
+
+    public void setBoard(Map<Player, Square> board) {
+        this.board = board;
+    }
+
+    public void set(Player player, Square square) {
+        board.put(player, square);
+    }
+
+    @Override
+    public String toString() {
+        return "TestGame{" +
+                "board=" + board +
+                '}';
     }
 }

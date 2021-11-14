@@ -1,11 +1,15 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hk.edu.polyu.comp3211.g27.model.Game;
 
 public class IncomeTaxSquare extends Square{
     public static final double RATE = 0.1;
 
-    public IncomeTaxSquare(int index, String label) {
+    @JsonCreator
+    public IncomeTaxSquare(@JsonProperty("index") int index,
+                           @JsonProperty("label") String label) {
         super(index, label);
     }
 

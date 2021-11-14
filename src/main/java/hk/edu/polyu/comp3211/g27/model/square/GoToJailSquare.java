@@ -1,12 +1,16 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
 import hk.edu.polyu.comp3211.g27.model.SquareFactory;
 
 public class GoToJailSquare extends Square {
 
-    public GoToJailSquare(int index, String label) {
+    @JsonCreator
+    public GoToJailSquare(@JsonProperty("index") int index,
+                          @JsonProperty("label") String label) {
         super(index, label);
     }
 

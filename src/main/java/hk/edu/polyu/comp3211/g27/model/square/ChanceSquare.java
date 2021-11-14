@@ -1,5 +1,7 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
 
@@ -8,7 +10,9 @@ import java.util.Random;
 public class ChanceSquare extends Square{
     private final static int MULTIPLE = 10;
 
-    public ChanceSquare(int index, String label) {
+    @JsonCreator
+    public ChanceSquare(@JsonProperty("index") int index,
+                        @JsonProperty("label") String label) {
         super(index, label);
     }
 
