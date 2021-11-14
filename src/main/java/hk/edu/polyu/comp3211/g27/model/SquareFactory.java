@@ -5,7 +5,7 @@ import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import java.util.HashMap;
+import java.util.ArrayList;
 
 /**
  * A convenient and efficient place to store and fetch {@link Square}s in a game board.
@@ -13,108 +13,106 @@ import java.util.HashMap;
 public class SquareFactory {
     public static final int SQUARE_CNT = 20; // number of squares in the game
 
-    private static HashMap<Integer, String> squareList= new HashMap<Integer, String>(){
+    /**
+     * Initialize all squares
+     */
+    private static ArrayList<Square> squareList = new ArrayList<Square>(){
         {
-            put(2,"Central");
-            put(3,"Wan Chai");
-            put(5,"Stanley");
-            put(7,"Shek O");
-            put(8,"Mong Kok");
-            put(9,"CHANCE");
-            put(10,"Tsing Yi");
-            put(12,"Shatin");
-            put(13,"CHANCE");
-            put(14,"Tuen Mun");
-            put(15,"Tai Po");
-            put(17,"Sai Kung");
-            put(18,"Yuen Long");
-            put(19,"CHANCE");
-            put(20,"Tai O");
+            add(new GoSquare(1,"GO"));
+            add(new PropertySquare(2,"Central",800,90));
+            add(new PropertySquare(3,"Wan Chai",700,65));
+            add(new IncomeTaxSquare(4,"INCOME TAX"));
+            add(new PropertySquare(5,"Stanley",600,60));
+            add(new JailSquare(6,"IN JAIL"));
+            add(new PropertySquare(7,"Shek O",400,10));
+            add(new PropertySquare(8,"Mong Kok",500,40));
+            add(new ChanceSquare(9,"CHANCE"));
+            add(new PropertySquare(10,"Tsing Yi",400,15));
+            add(new FreeParkingSquare(11,"FREE PARKING"));
+            add(new PropertySquare(12,"Shatin",700,75));
+            add(new ChanceSquare(13,"CHANCE"));
+            add(new PropertySquare(14,"Tuen Mun",400,20));
+            add(new PropertySquare(15,"Tai Po",500,25));
+            add(new GoToJailSquare(16,"GO TO JAIL"));
+            add(new PropertySquare(17,"Sai Kung",400,10));
+            add(new PropertySquare(18,"Yuen Long",400,25));
+            add(new ChanceSquare(19,"CHANCE"));
+            add(new PropertySquare(20,"Tai O",600,25));
         }
     };
 
-    private static HashMap<Integer, Integer> priceList = new HashMap<Integer, Integer>(){
-        {
-            put(2,800);
-            put(3,700);
-            put(5,600);
-            put(7,400);
-            put(8,500);
-            put(10,400);
-            put(12,700);
-            put(14,400);
-            put(15,500);
-            put(17,400);
-            put(18,400);
-            put(20,600);
-        }
-    };
-
-    private static HashMap<Integer, Integer> rentList = new HashMap<Integer, Integer>(){
-        {
-            put(2,90);
-            put(3,65);
-            put(5,60);
-            put(7,10);
-            put(8,40);
-            put(10,15);
-            put(12,75);
-            put(14,20);
-            put(15,25);
-            put(17,10);
-            put(18,25);
-            put(20,25);
-        }
-    };
-
-    public static @Nullable Square getSquare(int index) {return null;}
-
-    public static @Nullable Square getSquare(String label) {
-        return null;
-    }
-
-    public static @Nullable FreeParkingSquare getFreeParkingSquare(){
-        return new FreeParkingSquare(11,"FREE PARKING");
-    }
-
-    public static @Nullable PropertySquare getPropertySquare(int index) {
-        return new PropertySquare(index, squareList.get(index), priceList.get(index), rentList.get(index));
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @param index the square index
+     * @return the square with label
+     */
+    public static @Nullable Square getSquare(int index) {
+        return squareList.get(index);
     }
 
     /**
      * Return null if no square with {@code label} is found.
      *
-     * @param label the square label
-     * @return the property square with label
+     * @param index the property square index
+     * @return the property square with label, price, rent
      */
-    public static @Nullable PropertySquare getPropertySquare(String label) {
-        int index = 0;
-        for (int key: squareList.keySet()){
-            if (squareList.get(key) == label){
-                index = key;
-                break;
-            }
-        }
-        return new PropertySquare(index, label, priceList.get(index), rentList.get(index));
+    public static @Nullable PropertySquare getPropertySquare(int index) {
+        return (PropertySquare)squareList.get(index);
     }
 
-    public static ChanceSquare getChanceSquare(int index) {
-        return new ChanceSquare(index, squareList.get(index));
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @param index the chance square index
+     * @return the Chance square with label
+     */
+    public static @Nullable ChanceSquare getChanceSquare(int index) {
+        return (ChanceSquare)squareList.get(index);
     }
 
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @return the Free Parking square with index, label
+     */
+    public static @Nullable FreeParkingSquare getFreeParkingSquare(){
+        return (FreeParkingSquare)squareList.get(11);
+    }
+
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @return the Go square with index, label
+     */
     public static @NotNull GoSquare getGoSquare() {
-        return new GoSquare(1, "GO");
+        return (GoSquare)squareList.get(1) ;
     }
 
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @return the Go To Jail square with index, label
+     */
     public static @NotNull GoToJailSquare getGoToJailSquare() {
-        return new GoToJailSquare(16, "GO TO JAIL");
+        return (GoToJailSquare)squareList.get(16);
     }
 
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @return the Income Tax square with index, label
+     */
     public static @NotNull IncomeTaxSquare getIncomeTaxSquare() {
-        return new IncomeTaxSquare(4, "INCOME TAX");
+        return (IncomeTaxSquare)squareList.get(4);
     }
 
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @return the Jail square with index, label
+     */
     public static @NotNull JailSquare getJailSquare() {
-        return new JailSquare(6, "JAIL");
+        return (JailSquare)squareList.get(6);
     }
 }
