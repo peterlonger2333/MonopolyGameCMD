@@ -54,10 +54,44 @@ public class SquareFactory {
     /**
      * Return null if no square with {@code label} is found.
      *
+     * @param label the property square index
+     * @return the square with label
+     */
+    public static @Nullable Square getSquare(String label) {
+        int index = 0;
+        for(int i = 0; i < SQUARE_CNT; i++){
+            if (squareList.get(i).getLabel() == label){
+                index = i;
+                break;
+            }
+        }
+        return squareList.get(index);
+    }
+
+    /**
+     * Return null if no square with {@code label} is found.
+     *
      * @param index the property square index
      * @return the property square with label, price, rent
      */
     public static @Nullable PropertySquare getPropertySquare(int index) {
+        return (PropertySquare)squareList.get(index);
+    }
+
+    /**
+     * Return null if no square with {@code label} is found.
+     *
+     * @param label the property square index
+     * @return the property square with label, price, rent
+     */
+    public static @Nullable PropertySquare getPropertySquare(String label) {
+        int index = 0;
+        for(int i = 0; i < SQUARE_CNT; i++){
+            if (squareList.get(i).getLabel() == label){
+                index = i;
+                break;
+            }
+        }
         return (PropertySquare)squareList.get(index);
     }
 
@@ -77,7 +111,7 @@ public class SquareFactory {
      * @return the Free Parking square with index, label
      */
     public static @Nullable FreeParkingSquare getFreeParkingSquare(){
-        return (FreeParkingSquare)squareList.get(11);
+        return (FreeParkingSquare)squareList.get(10);
     }
 
     /**
@@ -86,7 +120,7 @@ public class SquareFactory {
      * @return the Go square with index, label
      */
     public static @NotNull GoSquare getGoSquare() {
-        return (GoSquare)squareList.get(1) ;
+        return (GoSquare)squareList.get(0) ;
     }
 
     /**
@@ -95,7 +129,7 @@ public class SquareFactory {
      * @return the Go To Jail square with index, label
      */
     public static @NotNull GoToJailSquare getGoToJailSquare() {
-        return (GoToJailSquare)squareList.get(16);
+        return (GoToJailSquare)squareList.get(15);
     }
 
     /**
@@ -104,7 +138,7 @@ public class SquareFactory {
      * @return the Income Tax square with index, label
      */
     public static @NotNull IncomeTaxSquare getIncomeTaxSquare() {
-        return (IncomeTaxSquare)squareList.get(4);
+        return (IncomeTaxSquare)squareList.get(3);
     }
 
     /**
@@ -113,6 +147,6 @@ public class SquareFactory {
      * @return the Jail square with index, label
      */
     public static @NotNull JailSquare getJailSquare() {
-        return (JailSquare)squareList.get(6);
+        return (JailSquare)squareList.get(5);
     }
 }
