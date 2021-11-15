@@ -15,7 +15,7 @@ public class SquareFactoryTest {
     private static final String freeParkingSquareLabel = "FREE PARKING";
 
     private static final int[] propertySquareIndex = {2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 18, 20};
-    private static final String[] propertySquareLabel = {"CENTRAL", "Wan Chai", "Stanley",
+    private static final String[] propertySquareLabel = {"Central", "Wan Chai", "Stanley",
                                                          "Shek O", "Mong Kok", "Tsing Yi", "Satin",
                                                          "Tuen Mun", "Tai Po", "Sai Kung", "Yuen Long", "Tai O"};
 
@@ -31,19 +31,22 @@ public class SquareFactoryTest {
     private static final int incomeTaxSquareIndex = 4;
     private static final String incomeTaxSquareLabel = "INCOME TAX";
 
+    private static final int jailSquareIndex = 6;
+    private static final String jailSquareLabel = "IN JAIL";
+
     @Test
     @DisplayName("Fetch free parking square test.")
-    public void fetchSquareTest(){
-        Square square = SquareFactory.getSquare(freeParkingSquareIndex);
+    public void fetchFreeParkingSquareTest(){
+        FreeParkingSquare freeParkingSquare = SquareFactory.getFreeParkingSquare();
 
-        assertEquals(freeParkingSquareLabel, square.getLabel());
+        assertEquals(freeParkingSquareLabel, freeParkingSquare.getLabel());
     }
 
     @Test
     @DisplayName("Fetch property square test.")
     public void fetchPropertySquareTest(){
         for (int i = 0; i < propertySquareIndex.length; i++){
-            PropertySquare propertySquare = SquareFactory.getPropertySquare(propertySquareIndex[i]);
+            PropertySquare propertySquare = SquareFactory.getPropertySquare(propertySquareIndex[i]-1);
 
             assertEquals(propertySquareLabel[i], propertySquare.getLabel());
         }
@@ -53,7 +56,7 @@ public class SquareFactoryTest {
     @DisplayName("Fetch chance square test.")
     public void fetchChanceSquareTest(){
         for (int squareIndex : chanceSquareIndex) {
-            ChanceSquare chanceSquare = SquareFactory.getChanceSquare(squareIndex);
+            ChanceSquare chanceSquare = SquareFactory.getChanceSquare(squareIndex-1);
 
             assertEquals(chanceSquareLabel, chanceSquare.getLabel());
         }
@@ -84,5 +87,14 @@ public class SquareFactoryTest {
 
         assertEquals(incomeTaxSquareIndex, incomeTaxSquare.getIndex());
         assertEquals(incomeTaxSquareLabel, incomeTaxSquare.getLabel());
+    }
+
+    @Test
+    @DisplayName("Fetch jail square test.")
+    public void fetchJailSquareTest(){
+        JailSquare jailSquare = SquareFactory.getJailSquare();
+
+        assertEquals(incomeTaxSquareIndex, jailSquare.getIndex());
+        assertEquals(incomeTaxSquareLabel, jailSquare.getLabel());
     }
 }
