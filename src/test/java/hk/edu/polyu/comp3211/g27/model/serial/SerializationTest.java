@@ -1,7 +1,10 @@
-package hk.edu.polyu.comp3211.g27.model;
+package hk.edu.polyu.comp3211.g27.model.serial;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hk.edu.polyu.comp3211.g27.model.Game;
+import hk.edu.polyu.comp3211.g27.model.Player;
+import hk.edu.polyu.comp3211.g27.model.Turn;
 import hk.edu.polyu.comp3211.g27.model.square.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
