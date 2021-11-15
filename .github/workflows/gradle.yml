@@ -5,9 +5,7 @@ name: Java CI with Gradle
 
 on:
   push:
-    branches: [ master ]
   pull_request:
-  # run on all branches
 
 jobs:
   build:
@@ -26,3 +24,11 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Add coverage to PR
+      id: jacoco
+      uses: madrapps/jacoco-report@v1.2
+      with:
+        paths: ${{ github.workspace }}/build/reports/jacoco/testCoverage/testCoverage.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
+        min-coverage-overall: 40
+        min-coverage-changed-files: 60
