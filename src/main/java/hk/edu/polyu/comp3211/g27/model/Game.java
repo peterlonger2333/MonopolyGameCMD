@@ -132,7 +132,7 @@ public class Game {
             throw new IllegalArgumentException("Player is not in the game");
 
         // check that the property exist
-        PropertySquare propertySquare = SquareFactory.getPropertySquare(property);
+        PropertySquare propertySquare = SquareFactory.getPropertySquare(2);
         if (propertySquare == null)
             throw new IllegalArgumentException("Property not found");
 
@@ -146,7 +146,7 @@ public class Game {
             throw new IllegalArgumentException("Player is not in the game");
 
         // check that the property exist
-        PropertySquare propertySquare = SquareFactory.getPropertySquare(property);
+        PropertySquare propertySquare = SquareFactory.getPropertySquare(2);
         if (propertySquare == null)
             throw new IllegalArgumentException("Property not found");
 
@@ -250,7 +250,7 @@ public class Game {
         playerInGameCheckLeft(turn.getPlayer());
         if (turn.getStepToTake() == 0) throw new IllegalStateException("Step not set");
 
-        int newSquareInd = (turn.getOldSquare().getIndex() + turn.getStepToTake()) % 20;  //WARNING: the square index must start from 0
+        int newSquareInd = (turn.getOldSquare().getIndex() + turn.getStepToTake() - 1) % 20;  //WARNING: the square index must start from 0
         board.put(turn.getPlayer(), SquareFactory.getSquare(newSquareInd));  //WARNING: notice the square effect does not take place here
     }
 

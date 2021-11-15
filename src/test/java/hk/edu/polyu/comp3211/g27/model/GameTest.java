@@ -143,17 +143,17 @@ public class GameTest {
         String propertyLabel = SquareFactory.getPropertySquare(1).getLabel();
 
         game.grantOwnership(p1, propertyLabel);
-        assertThat(game.propertyHoldingStatus(), hasEntry(p1, hasItem(propertyLabel)));
+        assertThat(game.propertyHoldingStatus().get(p1), hasItem(propertyLabel));
 
         game.revokeOwnership(p1, propertyLabel);
-        assertThat(game.propertyHoldingStatus(), not(hasEntry(p1, hasItem(propertyLabel))));
+        assertThat(game.propertyHoldingStatus().get(p1), not(hasItem(propertyLabel)));
     }
 
     @Test
     @DisplayName("Can put a player in and out of jail")
     public void canPutPlayerInAndOutOfJail() {
         game.putInJail(p1);
-        assertThat(game.inJailCheck(p1), equalTo(3));
+        assertThat(game.inJailCheck(p1), equalTo(4));
 
         game.releaseFromJail(p1);
         assertThat(game.inJailCheck(p1), equalTo(0));
@@ -165,8 +165,10 @@ public class GameTest {
         game.putInJail(p1);
 
         for (int i = 0; i < 4; i++) game.next(); // forward to next round
+        assertThat(game.inJailCheck(p1), equalTo(3)); // this is the first term
 
-        assertThat(game.inJailCheck(p1), equalTo(2));
+        for (int i = 0; i < 4; i++) game.next(); // forward to next round
+        assertThat(game.inJailCheck(p1), equalTo(2)); // this is the second term
     }
 
     @Test

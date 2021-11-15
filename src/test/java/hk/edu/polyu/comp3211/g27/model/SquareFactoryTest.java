@@ -16,7 +16,7 @@ public class SquareFactoryTest {
 
     private static final int[] propertySquareIndex = {2, 3, 5, 7, 8, 10, 12, 14, 15, 17, 18, 20};
     private static final String[] propertySquareLabel = {"Central", "Wan Chai", "Stanley",
-                                                         "Shek O", "Mong Kok", "Tsing Yi", "Satin",
+                                                         "Shek O", "Mong Kok", "Tsing Yi", "Shatin",
                                                          "Tuen Mun", "Tai Po", "Sai Kung", "Yuen Long", "Tai O"};
 
     private static final int[] chanceSquareIndex = new int[]{9, 13, 19};
@@ -94,7 +94,7 @@ public class SquareFactoryTest {
     public void fetchJailSquareTest(){
         JailSquare jailSquare = SquareFactory.getJailSquare();
 
-        assertEquals(incomeTaxSquareIndex, jailSquare.getIndex());
-        assertEquals(incomeTaxSquareLabel, jailSquare.getLabel());
+        assertEquals(jailSquareIndex, jailSquare.getIndex());
+        assertEquals(jailSquareLabel, jailSquare.getLabel());
     }
 }
