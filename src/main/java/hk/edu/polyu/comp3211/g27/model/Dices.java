@@ -1,5 +1,8 @@
 package hk.edu.polyu.comp3211.g27.model;
 
+import hk.edu.polyu.comp3211.g27.Utils;
+import hk.edu.polyu.comp3211.g27.exception.GameAbortException;
+
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
@@ -14,9 +17,9 @@ public class Dices {
         };
     }
 
-    public static int[] makeDraw() throws IOException {
-        System.out.print("Hit enter to draw dices");
-        System.in.read();
+    public static int[] makeDraw() throws GameAbortException {
+        String input = Utils.readLine("Hit enter to draw dice");
+        if (input.equalsIgnoreCase("Quit")) throw new GameAbortException();
 
         int[] dices = Dices.draw();
         System.out.println("You've drawn: " + Arrays.toString(dices));

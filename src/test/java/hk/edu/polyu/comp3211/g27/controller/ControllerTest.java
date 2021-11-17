@@ -42,4 +42,10 @@ class ControllerTest {
 
         assert loaded.equals(game);
     }
+
+    @Test
+    void canReportWhetherGameExists() {
+        String id = "NoSuchGame";
+
+    }
 }

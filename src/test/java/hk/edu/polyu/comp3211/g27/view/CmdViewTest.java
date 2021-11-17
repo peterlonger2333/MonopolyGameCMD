@@ -28,5 +28,17 @@ public class CmdViewTest {
     @Test
     void game() {
         System.out.println(view.game());
+        game.currentTurn().setStepToTake(1);
+        game.move();
+        System.out.println(view.game());
+        game.next();
+
+        game.currentTurn().setStepToTake(2);
+        game.move();
+        System.out.println(view.game());
+
+        game.subtractMoney(1600, game.currentTurn().getPlayer());
+        game.next();
+        System.out.println(view.game());
     }
 }

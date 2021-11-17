@@ -14,7 +14,13 @@ import java.util.Objects;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = GoSquare.class, name = "GoSquare")
+        @JsonSubTypes.Type(value = GoSquare.class, name = "GoSquare"),
+        @JsonSubTypes.Type(value = ChanceSquare.class, name = "ChanceSquare"),
+        @JsonSubTypes.Type(value = FreeParkingSquare.class, name = "FreeParkingSquare"),
+        @JsonSubTypes.Type(value = GoToJailSquare.class, name = "GoToJailSquare"),
+        @JsonSubTypes.Type(value = IncomeTaxSquare.class, name = "IncomeTaxSquare"),
+        @JsonSubTypes.Type(value = JailSquare.class, name = "JailSquare"),
+        @JsonSubTypes.Type(value = PropertySquare.class, name = "PropertySquare")
 })
 public abstract class Square {
     private final int index;

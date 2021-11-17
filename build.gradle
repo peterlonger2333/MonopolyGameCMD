@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'jacoco'
+    id 'application'
 }
 
 group 'hk.edu.polyu.comp3211.g27'
@@ -44,4 +45,12 @@ test {
 }
 jacocoTestReport {
     dependsOn test // tests are required to run before generating the report
+}
+
+application {
+    mainClass = "${group}.Client"
+}
+
+run { // to start application with gradle: ./gradlew -q --console plain run
+    standardInput = System.in
 }
