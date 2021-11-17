@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp3211.g27.model.square;
 
+import hk.edu.polyu.comp3211.g27.Utils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -62,6 +63,7 @@ public class PropertySquareTest extends SquareTestBase {
     public void canBuyProperty() {
         InputStream mockInputStream = new ByteArrayInputStream("y\n".getBytes(StandardCharsets.UTF_8));
         System.setIn(mockInputStream);
+        Utils.scanner = new Scanner(mockInputStream);
 
         when(game.currentTurn()).thenReturn(turn);
         when(game.currentMoney(player1)).thenReturn(120);
