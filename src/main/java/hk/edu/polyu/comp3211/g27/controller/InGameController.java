@@ -33,17 +33,12 @@ public class InGameController {
         game().next();
     }
 
-    private int getRandomStep() {
-        return dice.nextInt(3) + dice.nextInt(3) + 2;
-    }
-
-    private void move() throws IOException {
+    private void move() {
+        System.out.println(game().currentTurn().getPlayer().getId() + "'s turn");
         int[] draw = Dices.makeDraw();
         int move = draw[0] + draw[1];
-        System.out.println("You've drawn: " + move);
 
         turn().setStepToTake(move);
-        turn().setNewSquare(SquareFactory.getSquare((turn().getOldSquare().getIndex() + move - 1) % 20));
         game().move();
     }
 

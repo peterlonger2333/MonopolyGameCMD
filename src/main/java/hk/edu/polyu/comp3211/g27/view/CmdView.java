@@ -64,19 +64,19 @@ public class CmdView {
             }
         }
 
-        b1.append("Here shows the players in Jail after this turn: \n");
-        int check_num=0;
-        for (int k=1;k<=GameHolder.get().playersLeft().size();k++){
-            if (GameHolder.get().inJailCheck(GameHolder.get().playersLeft().get(k-1))!=0){
-                b1.append(GameHolder.get().playersLeft().get(k-1).getId()+"   "+"\n");
-                check_num+=1;
-            }
-        }
-        if (check_num==0){
-            b1.append("--NA--"+"\n");
-        }
-        String list_str= joiner.join(newBoard,b1);
-        return list_str;
+//        b1.append("Here shows the players in Jail after this turn: \n");
+//        int check_num=0;
+//        for (int k=1;k<=GameHolder.get().playersLeft().size();k++){
+//            if (GameHolder.get().inJailCheck(GameHolder.get().playersLeft().get(k-1))!=0){
+//                b1.append(GameHolder.get().playersLeft().get(k-1).getId()+"   "+"\n");
+//                check_num+=1;
+//            }
+//        }
+//        if (check_num==0){
+//            b1.append("--NA--"+"\n");
+//        }
+
+        return joiner.join(newBoard, b1);
     }
 
     public String gameId(){  //

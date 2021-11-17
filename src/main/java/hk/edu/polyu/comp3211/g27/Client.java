@@ -20,20 +20,20 @@ import java.util.stream.Collectors;
  * The game entry point.
  */
 public class Client implements Runnable {
-    private static String welcome = "Welcome to Monopoly\n";
-    private static String menu = new StringBuilder()
+    private static final String welcome = "Welcome to Monopoly\n";
+    private static final String menu = new StringBuilder()
             .append("Menu:\n")
             .append("\t1. Start New Game\n")
             .append("\t2. Load Existing Game\n")
             .append("\t3. Help\n")
             .toString();
-    private static String playerPrompt = "Enter number of players";
+    private static final String playerPrompt = "Enter number of players";
 
     private GameState state;
-    private PreGameController pre = new PreGameController();
-    private InGameController in = new InGameController();
-    private PostGameController post = new PostGameController();
-    private CmdView view = new CmdView();
+    private final PreGameController pre = new PreGameController();
+    private final InGameController in = new InGameController();
+    private final PostGameController post = new PostGameController();
+    private final CmdView view = new CmdView();
 
     public static void main(String[] args) {
         new Thread(new Client()).start();
@@ -92,6 +92,7 @@ public class Client implements Runnable {
     }
 
     private void startNewGame() {
+        // dictate that there be 4-6 players
         int playerCnt = Integer.parseInt(Utils.readOption(playerPrompt, "4", "5", "6")); // #Players
 
         List<Player> players = new ArrayList<>();
