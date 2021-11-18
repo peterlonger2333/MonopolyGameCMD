@@ -20,7 +20,7 @@ public class IncomeTaxSquare extends Square{
      */
     @Override
     public void onEnter(Game game) {
-        int tax =  (int) (game.currentMoney(game.currentTurn().getPlayer()) * RATE);
+        int tax =  (int) (Math.floor((game.currentMoney(game.currentTurn().getPlayer()) * RATE)/10.0)*10.0);
         System.out.println("Paying tax: $" + tax);
 
         game.subtractMoney(

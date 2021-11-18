@@ -29,9 +29,16 @@ public class ChanceSquare extends Square{
      */
     @Override
     public void onEnter(Game game) {
+        int amount = getAmount();
         game.addMoney(
-                getAmount(),
+                amount,
                 game.currentTurn().getPlayer()
         );
+        if(amount > 0)
+            System.out.println("You have gained: $" + amount);
+        else if(amount < 0)
+            System.out.println("You have lost: $" + Math.abs(amount));
+        else
+            System.out.println("You neither gain or lose money.");
     }
 }
