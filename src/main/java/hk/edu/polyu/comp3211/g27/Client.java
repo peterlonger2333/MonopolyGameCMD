@@ -64,6 +64,7 @@ public class Client implements Runnable {
                     }
                 } else {
                     System.out.println("Goodbye!");
+                    System.exit(0);
                 }
             } catch (Exception e) {
                 System.err.println(e.getMessage());

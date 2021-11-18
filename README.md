@@ -1,6 +1,10 @@
 # The Monopoly Game
 
-A command line implementation of the Monopoly Game for COMP3211 - Software Engineering at The Hong Kong Polytechnic University. Clone this repository to give it a try: `git clone https://github.com/McXD/MonopolyGameCMD`. The master branch hosts the latest stable version. The minimum system requirement is you have **JRE 1.8+** installed.
+A command line implementation of the Monopoly Game for COMP3211 - Software Engineering at The Hong Kong Polytechnic University.
+
+Clone this repository and give it a try: `git clone https://githubcom/McXD/MonopolyGameCMD`.
+
+The master branch hosts the latest stable version. The minimum system requirement is you have **JRE 1.8+** installed to run the game. If you want to build, you must have the corresponding JDK as well.
 
 ## Build From Source
 
@@ -18,11 +22,11 @@ We recommend three ways to run this project if you have this repository on you m
 
 ### Run via IntelliJ
 
-You can open the project in IntelliJ IDEA. The Gradle plugin should recognize this is a gradle project and prepare it for you. After it is finished, navigate to `Client.java` under `src` and hit run.
+You can open the project in IntelliJ IDEA. The Gradle plugin should recognize this is a gradle project and prepare it for you. After it is finished, navigate to `Client.java` under `src` and hit run. Alternatively, run in debug mode if you want to inspect the system's runtime information.
 
 ### Run via Gradle
 
-Alternatively, run this app via a console/terminal. First navigate to the project directory and run `./gradlew -q --console plain run`
+Gradle makes running this app via a console/terminal a one liner. Just navigate to the project directory and run `./gradlew -q --console plain run`
 
 ### Run via Jar
 
