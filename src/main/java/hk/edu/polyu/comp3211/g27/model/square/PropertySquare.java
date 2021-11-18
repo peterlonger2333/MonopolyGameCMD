@@ -2,6 +2,7 @@ package hk.edu.polyu.comp3211.g27.model.square;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import hk.edu.polyu.comp3211.g27.Utils;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
 import hk.edu.polyu.comp3211.g27.model.Turn;
@@ -61,7 +62,6 @@ public class PropertySquare extends Square{
      */
     @Override
     public void onEnter(Game game) {
-        Scanner scanner = new Scanner(System.in);
         Turn currentTurn = game.currentTurn();
         Player currentPlayer = currentTurn.getPlayer();
 
@@ -69,14 +69,9 @@ public class PropertySquare extends Square{
             if (game.currentMoney(currentPlayer) < price) { // if the player don't have enough money
                 System.out.println("The square is not owned but you do not have enough money.");
             } else { // ask if the player wants this property
-                String option = "a";
+                boolean buy = Utils.readYN("Do you want to buy this property");
 
-                while (!option.equalsIgnoreCase("y") && !option.equalsIgnoreCase("n")) {
-                    System.out.print("Do you want to buy this property (Y/n): ");
-                    option = scanner.nextLine();
-                }
-
-                if (option.equalsIgnoreCase("y")) { // buy this property
+                if (buy) { // buy this property
                     game.grantOwnership(currentPlayer, getLabel());
                     game.subtractMoney(price, currentPlayer);
                 } else { // don't buy

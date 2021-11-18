@@ -1,5 +1,6 @@
 package hk.edu.polyu.comp3211.g27.model;
 
+import hk.edu.polyu.comp3211.g27.model.square.PropertySquare;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -191,5 +192,18 @@ public class GameTest {
 
         assertThat(game.getRound(), equalTo(101));
         assert game.isGameEnd();
+    }
+
+    @Test
+    public void shouldCleanUpGameStateWhenAPlayerExit() {
+        PropertySquare propertySquare = SquareFactory.getPropertySquare(2);
+        game.grantOwnership(p1, propertySquare.getLabel());
+        game.subtractMoney(Game.INITIAL_MONEY + 1, p1); // prepare the user to be exited
+
+        for (int i = 0; i < 4; i++) game.next();
+
+        assertThat(game.playersLeft(), not(contains(p1)));
+        assertThat(game.propertyHoldingStatus().keySet(), not(contains(p1)));
+        assertThat(propertySquare.getHolder(), is(nullValue()));
     }
 }

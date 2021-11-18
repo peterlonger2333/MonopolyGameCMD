@@ -9,7 +9,7 @@ import hk.edu.polyu.comp3211.g27.model.Turn;
 
 import java.io.IOException;
 
-import static hk.edu.polyu.comp3211.g27.Utils.readOption;
+import static hk.edu.polyu.comp3211.g27.Utils.readYN;
 
 public class JailSquare extends Square{
     public static final int FINE = 150;
@@ -52,10 +52,9 @@ public class JailSquare extends Square{
         if (game.currentMoney(currentPlayer) < FINE) { // don't have enough money to pay the fine
             playDouble(game);
         } else {
-            System.out.print("Do you want to pay the fine before drawing the dice? (Y/n): ");
-            String option = readOption();
+            boolean payFine = readYN("Do you want to pay the fine before drawing the dice");
 
-            if (option.equalsIgnoreCase("y")) { // Pay the fine and let go
+            if (payFine) { // Pay the fine and let go
                 System.out.println("Hmm, seems pretty rich. Goodbye!");
                 game.subtractMoney(FINE, currentPlayer);
                 game.releaseFromJail(currentPlayer);

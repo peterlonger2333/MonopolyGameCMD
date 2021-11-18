@@ -252,6 +252,7 @@ public class Game {
 
         int newSquareInd = (turn.getOldSquare().getIndex() + turn.getStepToTake() - 1) % 20;  //WARNING: the square index must start from 0
         board.put(turn.getPlayer(), SquareFactory.getSquare(newSquareInd));  //WARNING: notice the square effect does not take place here
+        currentTurn.setNewSquare(SquareFactory.getSquare(newSquareInd));
     }
 
     public void move(Player player, Square toSquare) {
@@ -271,7 +272,7 @@ public class Game {
     @JsonIgnore
     public boolean isGameEnd() {
         if (round > MAX_ROUND) return true;
-        return currentPlayers.size() == 1;
+        return currentPlayers.size() == 1 || currentPlayers.size() == 0; // it is possible that after a round no player is left
     }
 
     public Turn currentTurn() {
@@ -298,9 +299,30 @@ public class Game {
                         });
 
             // handle player update
+            currentPlayers.forEach(p -> { // report
+                if (bank.get(p) < 0) System.out.println(p.getId() + " has negative earnings. Exited");
+            });
             currentPlayers.removeIf(it -> bank.get(it) < 0);
 
-            //TODO: may need to clean up the jail
+            // release property if holder exits
+            propertyHolding.forEach( // cleanup the squares themselves
+                    (player, properties) -> {
+                        if (!currentPlayers.contains(player)) {
+                            for (String property : properties) {
+                                SquareFactory.getPropertySquare(property).setHolder(null);
+                            }
+                        }
+                    }
+            );
+
+
+            // TODO: inefficient iteration
+            new HashSet<>(propertyHolding.keySet()).forEach(it -> { // remove from table
+                if (!currentPlayers.contains(it)) {
+                    propertyHolding.remove(it);
+                }
+            });
+
         } else {
             playerIndex += 1;
         }

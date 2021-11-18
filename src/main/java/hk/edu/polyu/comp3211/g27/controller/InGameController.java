@@ -1,7 +1,7 @@
 package hk.edu.polyu.comp3211.g27.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import hk.edu.polyu.comp3211.g27.model.Dices;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.SquareFactory;
 import hk.edu.polyu.comp3211.g27.model.Turn;
@@ -33,15 +33,10 @@ public class InGameController {
         game().next();
     }
 
-    private int getRandomStep() {
-        return dice.nextInt(3) + dice.nextInt(3) + 2;
-    }
-
-    private void move() throws IOException {
-        System.out.print("Hit Enter to roll dices");
-        System.in.read();
-        int move = getRandomStep();
-        System.out.println("You've drawn: " + move);
+    private void move() {
+        System.out.println(game().currentTurn().getPlayer().getId() + "'s turn");
+        int[] draw = Dices.makeDraw();
+        int move = draw[0] + draw[1];
 
         turn().setStepToTake(move);
         game().move();
