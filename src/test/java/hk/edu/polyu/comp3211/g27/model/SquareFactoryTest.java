@@ -32,7 +32,7 @@ public class SquareFactoryTest {
     private static final String incomeTaxSquareLabel = "INCOME TAX";
 
     private static final int jailSquareIndex = 6;
-    private static final String jailSquareLabel = "IN JAIL";
+    private static final String jailSquareLabel = "IN JAIL/JUST VISITING";
 
     @Test
     @DisplayName("Fetch free parking square test.")
