@@ -5,11 +5,33 @@ import hk.edu.polyu.comp3211.g27.controller.GameHolder;
 import hk.edu.polyu.comp3211.g27.model.Game;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * This class renders various components of a {@link Game}.
  */
 public class CmdView {
+    private static final int Square1_pos3=1906;
+    private static final int Square2_pos3=1894;
+    private static final int Square3_pos3=1882;
+    private static final int Square4_pos3=1870;
+    private static final int Square5_pos3=1858;
+    private static final int Square6_pos3=1846;
+    private static final int Square7_pos3=1526;
+    private static final int Square8_pos3=1206;
+    private static final int Square9_pos3=886;
+    private static final int Square10_pos3=566;
+    private static final int Square11_pos3=246;
+    private static final int Square12_pos3=258;
+    private static final int Square13_pos3=270;
+    private static final int Square14_pos3=282;
+    private static final int Square15_pos3=294;
+    private static final int Square16_pos3=306;
+    private static final int Square17_pos3=626;
+    private static final int Square18_pos3=946;
+    private static final int Square19_pos3=1266;
+    private static final int Square20_pos3=1586;
+
     /**
      * Render the game as a whole.
      *
@@ -18,65 +40,35 @@ public class CmdView {
     public String game() {
         Joiner joiner=Joiner.on("\n").skipNulls();
         ArrayList<String> list=new ArrayList<String>();
-        int[] square_pos= {1906,1894,1882,1870,1858,1846,1526,1206,886,566,246,258,270,282,294,306,626,946,1266,1586};
+        int[] square_pos= {Square1_pos3,Square2_pos3,Square3_pos3,Square4_pos3,Square5_pos3,Square6_pos3,
+                Square7_pos3,Square8_pos3,Square9_pos3,Square10_pos3,Square11_pos3,Square12_pos3,
+                Square13_pos3,Square14_pos3,Square15_pos3,Square16_pos3,Square17_pos3,Square18_pos3,Square19_pos3,Square20_pos3};
         StringBuilder newBoard=new StringBuilder(2161);
         newBoard.append(gameBoard());
         for (int i=0;i<GameHolder.get().playersLeft().size();i++) {
-            int number=GameHolder.get().currentSquare(GameHolder.get().playersLeft().get(i)).getIndex()-1;
+            int number=GameHolder.get().currentSquare(GameHolder.get().playersLeft().get(i)).getIndex() - 1;
             int position=square_pos[number];
             while (newBoard.charAt(position)!=' '){
                 position+=1;
             }
             //get the player relatively symbol to put into the pos.
-            int symbol_position=symbol_map().indexOf(GameHolder.get().playersLeft().get(i).getId())+GameHolder.get().playersLeft().get(i).getId().length();
-            String s=String.valueOf(symbol_map().charAt(symbol_position));
+            String s=symbol_map().get(GameHolder.get().playersLeft().get(i).getId());
             newBoard.replace(position,position+1,s);
         }
 
 
         //player matching table
         StringBuilder b1=new StringBuilder(10);
-        b1.append("     Player    |  Symbol  |   Property   \n");
+        b1.append("     Player    |   Money  |  In Jail  |    Property   \n");
         for (int n=1;n<=GameHolder.get().playersLeft().size();n++){
-            int symbol_position=symbol_map().indexOf(GameHolder.get().playersLeft().get(n-1).getId())+GameHolder.get().playersLeft().get(n-1).getId().length();
-            String s=String.valueOf(symbol_map().charAt(symbol_position));
-            b1.append(String.format("%-16s",GameHolder.get().playersLeft().get(n-1).getId()) + String.format("%-11s",s)+
-                        GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1))+"\n");
+            String s=symbol_map().get(GameHolder.get().playersLeft().get(n-1).getId());
+            b1.append(String.format("%-16s",GameHolder.get().playersLeft().get(n-1).getId()) + String.format("%-11s",GameHolder.get().currentMoney(GameHolder.get().playersLeft().get(n-1)))+
+                    String.format("%-11s",GameHolder.get().inJailCheck(GameHolder.get().playersLeft().get(n-1)))+ GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1))+"\n");
         }
 
-        //table.jail
-        b1.append("     Player    |   Money  |   Property   \n");
-        for (int n=1;n<=GameHolder.get().playersLeft().size();n++){
-            if (GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1)).size()==1){
-                b1.append(String.format("%-16s",GameHolder.get().playersLeft().get(n-1).getId()) + String.format("%-11s",GameHolder.get().currentMoney(GameHolder.get().playersLeft().get(n-1)))+
-                        GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1))+"\n");
-            }
-            else if(GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1)).size()==0){
-                b1.append(String.format("%-16s",GameHolder.get().playersLeft().get(n-1).getId()) + String.format("%-11s",GameHolder.get().currentMoney(GameHolder.get().playersLeft().get(n-1)))+
-                       "--NA--"+"\n");
-            }
-            else{
-                b1.append(String.format("%-16s",GameHolder.get().playersLeft().get(n-1).getId()) +String.format("%-11s",GameHolder.get().currentMoney(GameHolder.get().playersLeft().get(n-1)))+
-                        GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1)).get(0));
-                for (int k=1;k<GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1)).size();k++){
-                    b1.append("                           "+ GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1)).get(k)+"\n");
-                }
-            }
-        }
 
-//        b1.append("Here shows the players in Jail after this turn: \n");
-//        int check_num=0;
-//        for (int k=1;k<=GameHolder.get().playersLeft().size();k++){
-//            if (GameHolder.get().inJailCheck(GameHolder.get().playersLeft().get(k-1))!=0){
-//                b1.append(GameHolder.get().playersLeft().get(k-1).getId()+"   "+"\n");
-//                check_num+=1;
-//            }
-//        }
-//        if (check_num==0){
-//            b1.append("--NA--"+"\n");
-//        }
-
-        return joiner.join(newBoard, b1);
+        String list_str= joiner.join(newBoard,b1);
+        return list_str;
     }
 
     public String gameId(){  //
@@ -130,16 +122,13 @@ public class CmdView {
     }
 
     //mapping players id with symbol
-    public String symbol_map(){
-        Joiner joiner=Joiner.on("").skipNulls();
-        String[] array=new String[]{"@","#","$","%","&","*"};
-        ArrayList<String> list1=new ArrayList<String>();
+    public HashMap<String, String> symbol_map(){
+        String[] array=new String[]{"1","2","3","4","5","6"};
+        HashMap<String,String> mapping=new HashMap<String,String>();
         for (int i=0;i<GameHolder.get().playersLeft().size();i++){
-            list1.add(GameHolder.get().playersLeft().get(i).getId());
-            list1.add(array[i]);
+            mapping.put(GameHolder.get().playersLeft().get(i).getId(),array[i]);
         }
-        String list_str=joiner.join(list1);
-        return list_str;
+        return mapping;
     }
 
 
@@ -178,6 +167,4 @@ public class CmdView {
         return s;
     }
 }
-
-
 
