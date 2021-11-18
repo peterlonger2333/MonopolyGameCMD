@@ -27,6 +27,18 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-params:5.8.1'
 }
 
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'hk.edu.polyu.comp3211.g27.Client'
+        )
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
 test {
     useJUnitPlatform()
 }
