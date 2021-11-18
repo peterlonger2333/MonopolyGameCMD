@@ -3,6 +3,7 @@ package hk.edu.polyu.comp3211.g27.view;
 import hk.edu.polyu.comp3211.g27.controller.GameHolder;
 import hk.edu.polyu.comp3211.g27.model.Game;
 import hk.edu.polyu.comp3211.g27.model.Player;
+import hk.edu.polyu.comp3211.g27.model.Turn;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +21,13 @@ public class CmdViewTest {
         GameHolder.set(game);
     }
 
-    @Test
-    void printGameBoard() {
-        System.out.println(view.gameBoard());
-    }
+
 
     @Test
     void game() {
+        Turn currentTurn = game.currentTurn();
+        currentTurn.setStepToTake(1);
+        game.move();
         System.out.println(view.game());
         game.currentTurn().setStepToTake(1);
         game.move();
