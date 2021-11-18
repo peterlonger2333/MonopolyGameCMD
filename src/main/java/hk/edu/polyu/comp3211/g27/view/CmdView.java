@@ -46,7 +46,7 @@ public class CmdView {
         StringBuilder newBoard=new StringBuilder(2161);
         newBoard.append(gameBoard());
         for (int i=0;i<GameHolder.get().playersLeft().size();i++) {
-            int number=GameHolder.get().currentSquare(GameHolder.get().playersLeft().get(i)).getIndex();
+            int number=GameHolder.get().currentSquare(GameHolder.get().playersLeft().get(i)).getIndex() - 1;
             int position=square_pos[number];
             while (newBoard.charAt(position)!=' '){
                 position+=1;
