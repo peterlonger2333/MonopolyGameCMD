@@ -43,6 +43,13 @@ public class InGameController {
     }
 
     private void postMove() {
+        if (!turn().getOldSquare().equals(SquareFactory.getGoToJailSquare())) { // not from GoToJail to Jail
+            if (turn().getNewSquare().getIndex() < turn().getOldSquare().getIndex()
+                    && !turn().getNewSquare().equals(SquareFactory.getGoSquare())) { // passed GoSquare
+                SquareFactory.getGoSquare().onEnter(game()); // add money
+            }
+        }
+
         turn().getNewSquare().onEnter(game());
     }
 
