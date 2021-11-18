@@ -1,0 +1,112 @@
+*********************************************************************************************************
+                                     Welcome to The Monopoly Game!
+
+The game is played with a board divided into 20 squares, and a pair of four-sided (tetrahedral) dice and
+it can accommodate two to six players. Besides playing the game, Players should also be able to save and
+load a game.
+
+*********************************************************************************************************
+                                     Announcement and work flow
+
+1. Players have money and can own properties. Each player starts with HKD 1500 and no property.
+
+2. All players start from the first square ('Go').
+
+3. Players take turns in rolling the dice and advancing their respective tokens clockwise on the board.
+   After reaching square 20, a token moves to square 1 again.
+
+4. Certain squares take effect on a player (see below) when her token passes or lands on the square. For
+   example, they can change the player’s amount of money.
+
+5. If after taking a turn a player has a negative amount of money, she retires from the game. All her
+   properties become unowned.
+
+6. A round consists of all players taking their turns once.
+
+7. EACH turn the system will automatically display a player information table and the Gameboard (containing
+   EACH player position).
+   Information table Sample:
+                          Player    |   Money  |  In Jail  |    Property
+                          P1         1500       0           []
+                          P2         1500       0           []
+   * details about Jail number show in the below "In Jail/Just Visiting" Square.
+   * Property: [], means the player owns no property.
+
+8. The game ends either if there is only one player left or after 100 rounds. The winner is the player
+   with the most money at the end of the game. Ties (multiple winners) are possible.
+   >> IN ADDITION, players can choose to quit the game BY entering "Quit" when the system ask tolling dice
+   Hit enter to draw dice".
+
+9. The system will continue to generate the same question until the players give one of the expected
+   answers.
+
+*********************************************************************************************************
+                              7 different types of squares in the Game Board
+---------------------------------------------------------------------------------------------------------
+                                        --Property squares--
+They contain the name and the price of the property and can be owned by players. If a player lands on an
+unowned property, she can choose to buy it for the written price or do nothing. If a player lands on a
+property owned by another player, she has to pay a rent.
+
+                                >>>Here shows the Price and Rent amount:
+
+                                $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+                                Pos       Name       Price      Rent
+                                 2        Central      800       90
+                                 3        Wan Chai     700       65
+                                 5        Stanley      600       60
+                                 7        Shek O       400       10
+                                 8        Mong Kok     500       40
+                                 10       Tsing Yi     400       15
+                                 12       Shatin       700       75
+                                 14       Tuen Mun     400       20
+                                 15       Tai Po       500       25
+                                 17       Sai Kung     400       10
+                                 18       Yuen Long    400       25
+                                 20       Tai O        600       25
+                                $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+---------------------------------------------------------------------------------------------------------
+                                            --GO--
+
+Every time a player passes through (not necessarily lands on) this square, she gets HKD 1500 salary.
+---------------------------------------------------------------------------------------------------------
+                                          -- Chance--
+
+If a player lands on one of these squares, she either gains a random amount (multiple of 10) up to HKD
+200 or loses a random amount (multiple of 10) up to HKD 300.
+---------------------------------------------------------------------------------------------------------
+                                         --Income tax--
+
+If a player lands on this square,she pays 10% of her money (rounded down to a multiple of 10) as tax.
+---------------------------------------------------------------------------------------------------------
+                                         --Free parking--
+
+This square has no effect.
+---------------------------------------------------------------------------------------------------------
+                                          --Go to Jail--
+
+If landing on this square, she immediately goes to the 'In Jail' part of the 'In Jail/Just Visiting' square.
+---------------------------------------------------------------------------------------------------------
+                                          --In Jail/Just Visiting--
+
+If a player lands on this square, she is 'Just Visiting': the square has no effect.
+If the player got here by landing on 'Go to Jail', she is in jail and cannot make a move.
+
+>>>>Tip 1:
+A player gets out of jail by either throwing doubles (i.e., both dice coming out the same face up) on any
+of her next three turns (if she succeeds in doing this, she immediately moves forward by the number of spaces
+shown by her double throw) or paying a fine of HKD 150 before she rolls the dice on either of her next two turns.
+
+>>>>Tip 2:
+If the player does not throw doubles by her third turn, she must pay the HKD 150 fine. She then gets out of jail
+and immediately moves forward the number of spaces shown by her throw.
+
+* In Jail: 3-- in Jail, the 1st turn
+           2-- in Jail, the 2nd turn
+           1-- in Jail, the 3rd turn
+           0-- RELEASE from jail/ JUST VISITING
+
+---------------------------------------------------------------------------------------------------------
+                                          ^-^  Enjoy your game!
+*********************************************************************************************************

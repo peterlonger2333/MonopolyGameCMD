@@ -39,7 +39,7 @@ public class PreGameController {
      * {@code System.out}. Alternatively, enter an interactive reading session like *less* (a linux program)
      */
     public void help() {
-    System.out.println("*********************************************************************");
+        System.out.println("*********************************************************************");
         System.out.println("               Welcome to The Monopoly Game!");
         System.out.println("The game is played with a board divided into 20 squares, and a pair of \n" +
                 "four-sided (tetrahedral) dice and it can accommodate two to six players. Besides playing the \n" +

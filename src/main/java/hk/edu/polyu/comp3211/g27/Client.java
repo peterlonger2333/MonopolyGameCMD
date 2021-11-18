@@ -22,10 +22,11 @@ import java.util.stream.Collectors;
 public class Client implements Runnable {
     private static final String welcome = "Welcome to Monopoly\n";
     private static final String menu = new StringBuilder()
-            .append("Menu:\n")
+            .append("---Menu--\n")
             .append("\t1. Start New Game\n")
             .append("\t2. Load Existing Game\n")
             .append("\t3. Help\n")
+            .append("\tReminder: check the Help manual first to have a better experience ^-^\n")
             .toString();
     private static final String playerPrompt = "Enter number of players";
 
