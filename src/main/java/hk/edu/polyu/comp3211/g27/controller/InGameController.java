@@ -34,7 +34,7 @@ public class InGameController {
     }
 
     private void move() {
-        System.out.println(game().currentTurn().getPlayer().getId() + "'s turn");
+        System.out.println("Round: " + game().getRound() + ", " + game().currentTurn().getPlayer().getId() + "'s turn");
         int[] draw = Dices.makeDraw();
         int move = draw[0] + draw[1];
 
@@ -43,6 +43,8 @@ public class InGameController {
     }
 
     private void postMove() {
+        System.out.println("You have entered: " + turn().getNewSquare().toString()); // report new position
+
         if (!turn().getOldSquare().equals(SquareFactory.getGoToJailSquare())) { // not from GoToJail to Jail
             if (turn().getNewSquare().getIndex() < turn().getOldSquare().getIndex()
                     && !turn().getNewSquare().equals(SquareFactory.getGoSquare())) { // passed GoSquare

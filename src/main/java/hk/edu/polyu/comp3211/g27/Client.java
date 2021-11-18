@@ -93,7 +93,7 @@ public class Client implements Runnable {
 
     private void startNewGame() {
         // dictate that there be 4-6 players
-        int playerCnt = Integer.parseInt(Utils.readOption(playerPrompt, "4", "5", "6")); // #Players
+        int playerCnt = Integer.parseInt(Utils.readOption(playerPrompt, "2", "3", "4", "5", "6")); // #Players
 
         List<Player> players = new ArrayList<>();
         for (int i = 0; i < playerCnt; i++) {
