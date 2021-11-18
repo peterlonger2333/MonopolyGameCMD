@@ -23,7 +23,7 @@ public class SquareFactory {
             add(new PropertySquare(3,"Wan Chai",700,65));
             add(new IncomeTaxSquare(4,"INCOME TAX"));
             add(new PropertySquare(5,"Stanley",600,60));
-            add(new JailSquare(6,"IN JAIL"));
+            add(new JailSquare(6,"IN JAIL/JUST VISITING"));
             add(new PropertySquare(7,"Shek O",400,10));
             add(new PropertySquare(8,"Mong Kok",500,40));
             add(new ChanceSquare(9,"CHANCE"));
