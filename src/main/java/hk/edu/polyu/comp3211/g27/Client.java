@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -109,11 +110,13 @@ public class Client implements Runnable {
     }
 
     private void loadGame() throws IOException {
+        printArchive();
+
         boolean found = false;
         String id = "";
 
         while (!found) {
-            id = Utils.readLine("Enter the game id: ");
+            id = Utils.readLine("Enter the game id");
             found = hasGame(id);
         }
 
@@ -124,21 +127,46 @@ public class Client implements Runnable {
         state = GameState.IN_GAME;
     }
 
+    private void printArchive() {
+        String format = "\t\t\t%-40s|%-24s";
+        List<File> archiveFiles = getGameFiles();
+        archiveFiles.sort((o1, o2) -> { // most recent first
+            return (int) (o1.lastModified() - o2.lastModified());
+        });
+
+        System.out.println("Games in archive: ");
+        System.out.println(String.format(format, "Game ID", "Date"));
+        System.out.println("\t\t\t----------------------------------------------------------------"); // 54 '-'s
+        archiveFiles.forEach(it -> {
+            System.out.println(String.format(format, it.getName().split("\\.")[0], Utils.longToDate(it.lastModified())));
+        });
+    }
+
     /**
      * Load game from .archive
      *
      * @param id game id (file name)
      * @return the loaded game else null
      */
-    private boolean hasGame(String id) throws IOException {
+    private boolean hasGame(String id) {
+        return getGameIdsFromArchive().contains(id);
+    }
+
+    private List<String> getGameIdsFromArchive() {
         File archiveFolder = new File("./.archive");
         File[] listOfFiles = archiveFolder.listFiles();
+        listOfFiles[0].lastModified();
         List<String> fileNames = Arrays.stream(listOfFiles)
                 .map(File::getName)
                 .map(it -> it.split("\\.")[0])
                 .collect(Collectors.toList());
 
-        return fileNames.contains(id);
+        return fileNames;
+    }
+
+    private List<File> getGameFiles() {
+        File archiveFolder = new File("./.archive");
+        return Arrays.asList(archiveFolder.listFiles());
     }
 
     private void inGame() throws IOException {
