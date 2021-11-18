@@ -16,7 +16,7 @@ public class SquareFactory {
     /**
      * Initialize all squares
      */
-    private static ArrayList<Square> squareList = new ArrayList<Square>(){
+    private static final ArrayList<Square> squareList = new ArrayList<Square>(){
         {
             add(new GoSquare(1,"GO"));
             add(new PropertySquare(2,"Central",800,90));

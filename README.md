@@ -2,7 +2,7 @@
 
 A command line implementation of the Monopoly Game for COMP3211 - Software Engineering at The Hong Kong Polytechnic University.
 
-Clone this repository and give it a try: `git clone https://github.com/McXD/MonopolyGameCMD`.
+Clone this repository and give it a try: `git clone https://githubcom/McXD/MonopolyGameCMD`.
 
 The master branch hosts the latest stable version. The minimum system requirement is you have **JRE 1.8+** installed to run the game. If you want to build, you must have the corresponding JDK as well.
 
