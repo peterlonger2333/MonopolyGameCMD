@@ -43,7 +43,8 @@ public class InGameController {
     }
 
     private void postMove() {
-        System.out.println("You have entered: " + turn().getNewSquare().toString()); // report new position
+        System.out.println("You are current on square: " + turn().getNewSquare().getLabel() + "| index: "
+                + turn().getNewSquare().getIndex()); // report new position
 
         if (!turn().getOldSquare().equals(SquareFactory.getGoToJailSquare())) { // not from GoToJail to Jail
             if (turn().getNewSquare().getIndex() < turn().getOldSquare().getIndex()
