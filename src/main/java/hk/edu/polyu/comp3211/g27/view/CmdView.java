@@ -62,8 +62,9 @@ public class CmdView {
         b1.append("     Player    |   Money  |  In Jail  |    Property   \n");
         for (int n=1;n<=GameHolder.get().playersLeft().size();n++){
             String s=symbol_map().get(GameHolder.get().playersLeft().get(n-1).getId());
-            b1.append(String.format("%-16s",GameHolder.get().playersLeft().get(n-1).getId()) + String.format("%-11s",GameHolder.get().currentMoney(GameHolder.get().playersLeft().get(n-1)))+
-                    String.format("%-11s",GameHolder.get().inJailCheck(GameHolder.get().playersLeft().get(n-1)))+ GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1))+"\n");
+            b1.append(String.format("%-16s",GameHolder.get().playersLeft().get(n-1).getId()) + "  "+String.format("%-11s",GameHolder.get().currentMoney(GameHolder.get().playersLeft().get(n-1)))+
+                    "   "+String.format("%-8s",GameHolder.get().inJailCheck(GameHolder.get().playersLeft().get(n-1)))+"   "+
+                    GameHolder.get().propertyHoldingStatusFor(GameHolder.get().playersLeft().get(n-1))+"\n");
         }
 
 
