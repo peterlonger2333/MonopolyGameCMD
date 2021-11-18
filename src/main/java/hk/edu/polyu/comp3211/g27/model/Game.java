@@ -132,7 +132,7 @@ public class Game {
             throw new IllegalArgumentException("Player is not in the game");
 
         // check that the property exist
-        PropertySquare propertySquare = SquareFactory.getPropertySquare(2);
+        PropertySquare propertySquare = SquareFactory.getPropertySquare(property);
         if (propertySquare == null)
             throw new IllegalArgumentException("Property not found");
 
